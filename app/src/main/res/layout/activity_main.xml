@@ -33,5 +33,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/main_drvactive" />
+
+        <Button
+            android:id="@+id/btn_activeDrivesafeService"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/main_drvactiveserv" />
     </LinearLayout>
 </LinearLayout>

@@ -1,24 +1,20 @@
 package com.senior.g40.drivesafe;
 
 import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.senior.g40.drivesafe.engines.CrashingSensorEngines;
+import com.senior.g40.drivesafe.services.CrashDetectionService;
 import com.senior.g40.drivesafe.utils.LocationUtils;
 
 import butterknife.BindView;
@@ -27,10 +23,17 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.btn_activeDrivesafe)
-    Button btnActiveDrivesafe;
+
     @BindView(R.id.txt_gs)
     TextView txtGs;
+    @BindView(R.id.txt_app)
+    TextView txtApp;
+    @BindView(R.id.btn_activeDrivesafe)
+    Button btnActiveDrivesafe;
+    @BindView(R.id.btn_activeDrivesafeService)
+    Button btnActiveDrivesafeService;
+    @BindView(R.id.activity_main)
+    LinearLayout activityMain;
 
     private CrashingSensorEngines crashingSensorEngines;
 
@@ -42,16 +45,36 @@ public class MainActivity extends AppCompatActivity {
         validatePermission();
         crashingSensorEngines = CrashingSensorEngines.getInstance(this);
         crashingSensorEngines.setTxtviewOut(txtGs);
+
+    }
+
+    private int activateServiceState;
+    @Override
+    protected void onResume() {
+        super.onResume();
         txtGs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(LocationUtils.getInstance(MainActivity.this).getMapUri())));
             }
         });
+        btnActiveDrivesafeService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(1 - activateServiceState == 1){
+                    activateServiceState = 1;
+                    startService(new Intent(MainActivity.this, CrashDetectionService.class));
+                    btnActiveDrivesafeService.setText(R.string.main_drvpauseserv);
+                } else {
+                    btnActiveDrivesafeService.setText(R.string.main_drvactiveserv);
+                    activateServiceState = 0;
+                    stopService(new Intent(MainActivity.this, CrashDetectionService.class));
+                }
+            }
+        });
     }
 
     private int activateState;
-
     @OnClick(R.id.btn_activeDrivesafe)
     public void onClick() {
         activateState = 1 - activateState;
@@ -66,15 +89,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void validatePermission(){
+    public void validatePermission() {
         // Performs Permission Checking.
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, GRANT_FINE_LOCATION);
     }
 
     private final int GRANT_FINE_LOCATION = 1;
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(grantResults[0] == RESULT_CANCELED) {
+        if (grantResults[0] == RESULT_CANCELED) {
             switch (requestCode) {
                 case GRANT_FINE_LOCATION:
                     break;
@@ -85,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void toast(String msg){
+    public void toast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 }

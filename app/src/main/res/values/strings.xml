@@ -10,7 +10,9 @@
 
     <!--Main-->
     <string name="main_drvactive">Activate Drivesafe</string>
+    <string name="main_drvactiveserv">Activate Drivesafe As Service</string>
     <string name="main_drvdeactive">Deactivate Drivesafe</string>
+    <string name="main_drvpauseserv">Pause Drivesafe Service</string>
 
     <!--Simple-->
     <string name="ok">OKAY</string>
