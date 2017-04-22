@@ -130,7 +130,10 @@ public class CrashingSensorEngines implements SensorEventListener {
                         Toast.makeText(context, "False Accident Detected" + accLocationUtils.getLng(), Toast.LENGTH_LONG).show();
                         boolean isSuccess = Drivesafe.setSystemFalseAccident(context, Accident.getInsatance());
                         Log.v("isSuccess: ",isSuccess+"");
-                        falseWatcherHandler.removeCallbacks(this);
+                        try {
+                            Thread.sleep(10000L);
+                            falseWatcherHandler.removeCallbacks(this);
+                        } catch (InterruptedException e) {e.printStackTrace();}
                     } else {
                         falseWatcherHandler.post(this);
                     }
