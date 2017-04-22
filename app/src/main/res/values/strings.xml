@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Drivesafe</string>
+
+    <!--Login-->
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    <string name="login_register">Register</string>
+    <string name="login_login">Login</string>
+    <string name="login_nouser">Invalid User Data, Please Check your \'Username\' or \'Password\' is valid.</string>
+
+    <!--Main-->
+    <string name="main_drvactive">Activate Drivesafe</string>
+    <string name="main_drvdeactive">Deactivate Drivesafe</string>
+
+    <!--Simple-->
+    <string name="ok">OKAY</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="acknowledge">Acknowledge</string>
+    <string name="on">ON</string>
+    <string name="off">OFF</string>
+
+</resources>
