@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         validatePermission();
         crashingSensorEngines = CrashingSensorEngines.getInstance(this);
         crashingSensorEngines.setTxtviewOut(txtGs);
-
     }
 
     private int activateServiceState;
@@ -63,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(1 - activateServiceState == 1){
                     activateServiceState = 1;
+
                     startService(new Intent(MainActivity.this, CrashDetectionService.class));
                     btnActiveDrivesafeService.setText(R.string.main_drvpauseserv);
                 } else {
@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClick() {
         activateState = 1 - activateState;
         if (activateState == 1) {
+
             btnActiveDrivesafe.setText(getResources().getString(R.string.main_drvdeactive));
             crashingSensorEngines.start();
         } else {

@@ -24,4 +24,7 @@
     <string name="on">ON</string>
     <string name="off">OFF</string>
 
+    <!--Warning-->
+    <string name="warn_no_network">A Network Connectivity isn\'t Available</string>
+
 </resources>

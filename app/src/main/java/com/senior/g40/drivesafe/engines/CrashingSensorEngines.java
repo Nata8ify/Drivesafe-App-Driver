@@ -76,6 +76,7 @@ public class CrashingSensorEngines implements SensorEventListener {
 
 
     private boolean reqState;
+    public String verbose;
 
     @Override
     public void onSensorChanged(SensorEvent event) {
@@ -84,7 +85,7 @@ public class CrashingSensorEngines implements SensorEventListener {
         accZ = event.values[2];
         accLinear = Math.sqrt(((accX * accX) + (accY * accY) + (accZ * accZ)));
         gs = accLinear / 9.8;
-        if(accLocationUtils.getLng() != 0.0f & accLocationUtils.getLng() != 0.0f) { //<-- Please use something waiting or somethings.
+        if (accLocationUtils.getLng() != 0.0f & accLocationUtils.getLng() != 0.0f) { //<-- Please use something waiting or somethings.
             this.txtOut.setText(" G's : " + String.valueOf(gs) + "\n Latitude: " + accLocationUtils.getLat() + "\n Longitude: " + accLocationUtils.getLng());
             if (gs >= Accident.GS_DEBUG && !reqState) {
                 //TODO
@@ -103,7 +104,8 @@ public class CrashingSensorEngines implements SensorEventListener {
                 }, 5000l);
             }
         } else {
-            this.txtOut.setText("Service is Starting...");
+//            this.txtOut.setText("Service is Starting...");
+            verbose = "Service is Starting..."; //Move the Sensor thing into Service?
         }
     }
 
@@ -121,22 +123,25 @@ public class CrashingSensorEngines implements SensorEventListener {
 
     private Runnable falseWatcherRunnable;
     private Handler falseWatcherHandler;
-    private void falseWatcher(){
+
+    private void falseWatcher() {
         falseWatcherHandler = new Handler();
         falseWatcherRunnable = new Runnable() {
             @Override
             public void run() {
-                    if(accLocationUtils.getSpeed() > 0){
-                        Toast.makeText(context, "False Accident Detected" + accLocationUtils.getLng(), Toast.LENGTH_LONG).show();
-                        boolean isSuccess = Drivesafe.setSystemFalseAccident(context, Accident.getInsatance());
-                        Log.v("isSuccess: ",isSuccess+"");
-                        try {
-                            Thread.sleep(10000L);
-                            falseWatcherHandler.removeCallbacks(this);
-                        } catch (InterruptedException e) {e.printStackTrace();}
-                    } else {
-                        falseWatcherHandler.post(this);
+                if (accLocationUtils.getSpeed() > 0) {
+                    Toast.makeText(context, "False Accident Detected" + accLocationUtils.getLng(), Toast.LENGTH_LONG).show();
+                    boolean isSuccess = Drivesafe.setSystemFalseAccident(context, Accident.getInsatance());
+                    Log.v("isSuccess: ", isSuccess + "");
+                    try {
+                        Thread.sleep(10000L);
+                        falseWatcherHandler.removeCallbacks(this);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
+                } else {
+                    falseWatcherHandler.post(this);
+                }
             }
         };
         falseWatcherHandler.post(falseWatcherRunnable);

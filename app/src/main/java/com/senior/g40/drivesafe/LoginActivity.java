@@ -9,9 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.senior.g40.drivesafe.engines.UserEngines;
 import com.senior.g40.drivesafe.utils.Drivesafe;
+import com.senior.g40.drivesafe.utils.SettingVerify;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,20 +43,22 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick({R.id.btn_login, R.id.btn_register})
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_login:
-                if (UserEngines.getInstance(this)
-                        .login(edtxtLoginUsername.getText().toString(), edtxtLoginPassword.getText().toString())) {
-                    startActivity(new Intent(this, MainActivity.class));
-                    finish();
-                } else {
-                    txtHeadMessage.setVisibility(View.VISIBLE);
-                    txtHeadMessage.setText(getResources().getString(R.string.login_nouser));
-                }
-                break;
-            case R.id.btn_register:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Drivesafe.DRIVESAFE_HOST)));
-                break;
-        }
+        if (!SettingVerify.isNetworkConnected(this)) {return;}
+            switch (view.getId()) {
+                case R.id.btn_login:
+                    if (UserEngines.getInstance(this)
+                            .login(edtxtLoginUsername.getText().toString(), edtxtLoginPassword.getText().toString())) {
+                        startActivity(new Intent(this, MainActivity.class));
+                        finish();
+                    } else {
+                        txtHeadMessage.setVisibility(View.VISIBLE);
+                        txtHeadMessage.setText(getResources().getString(R.string.login_nouser));
+                    }
+                    break;
+                case R.id.btn_register:
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Drivesafe.DRIVESAFE_HOST)));
+                    break;
+            }
+
     }
 }

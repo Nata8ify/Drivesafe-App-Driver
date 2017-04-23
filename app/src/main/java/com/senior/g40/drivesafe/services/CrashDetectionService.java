@@ -16,11 +16,12 @@ import com.senior.g40.drivesafe.engines.CrashingSensorEngines;
 public class CrashDetectionService extends IntentService {
 
     private CrashingSensorEngines crashingSensorEngines;
-
+    private Intent intentServiceCDS;
 
     public CrashDetectionService() {
         super("Rescue Request Service");
     }
+
     public CrashDetectionService(String name) {
         super(name);
     }
@@ -29,52 +30,36 @@ public class CrashDetectionService extends IntentService {
     @Override
     public void onStart(Intent intent, int startId) {
         super.onStart(intent, startId);
-        crashingSensorEngines = CrashingSensorEngines.getInstance(this);
-        crashingSensorEngines.start();
+
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        return super.onStartCommand(intent, flags, startId);
+        intentServiceCDS = intent;
+        crashingSensorEngines = CrashingSensorEngines.getInstance(this);
+        crashingSensorEngines.start();
+        return START_STICKY;
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        crashingSensorEngines.stop();
-        Log.v("onDestroy: ", true+"");
+//        crashingSensorEngines.stop();
+        Log.v("onDestroy: ", true + "");
     }
 
     int i;
+
     @Override
     protected void onHandleIntent(Intent intent) {
-        while (true){
+        while (true) {
             ++i;
             try {
                 Thread.sleep(3000);
-                Log.v("I: ", i+"");
+                Log.v("I: ", i + "");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-    }
-
-    private class RunningCDSAsyncTask extends AsyncTask<Void, Void, Void>{
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-        }
-
     }
 }
