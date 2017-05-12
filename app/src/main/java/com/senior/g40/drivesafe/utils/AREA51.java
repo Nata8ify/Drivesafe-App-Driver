@@ -1,7 +1,5 @@
 package com.senior.g40.drivesafe.utils;
 
-import com.koushikdutta.async.parser.JSONObjectParser;
-
 /**
  * Created by PNattawut on 22-Apr-17.
  */

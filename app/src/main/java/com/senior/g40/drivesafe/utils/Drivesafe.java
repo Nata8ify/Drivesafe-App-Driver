@@ -3,7 +3,6 @@ package com.senior.g40.drivesafe.utils;
 import android.content.Context;
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.koushikdutta.ion.Ion;
 import com.senior.g40.drivesafe.models.Accident;
@@ -17,13 +16,14 @@ import java.util.concurrent.ExecutionException;
 
 public class Drivesafe {
     public static final String HOST = "http://103.253.146.87:8080";
-    //    public static final String DRIVESAFE_HOST = "http://103.253.146.87:8080/Drivesafe-1.0-SNAPSHOT/";
-    public static final String DRIVESAFE_HOST = "http://103.253.146.87:8080/Drivesafe/";
+//        public static final String DRIVESAFE_HOST = "http://103.253.146.87:8080/WeeWorh-1.0-SNAPSHOT/";
+    public static final String DRIVESAFE_HOST = "http://103.253.146.87:8080/Wheeworh/";
 
     public class URI {
         public static final String LOGIN = DRIVESAFE_HOST + "DriverIn?opt=login&utyp=M";
         public static final String CRASH_HIT = DRIVESAFE_HOST + "DriverIn?opt=acchit";
         public static final String SYS_FALSE_CRASH = DRIVESAFE_HOST + "DriverIn?opt=sys_accfalse";
+        public static final String USR_FALSE_CRASH = DRIVESAFE_HOST + "DriverIn?opt=usr_accfalse";
     }
     public class PARAM {
         /* Login Parameters */
@@ -41,8 +41,13 @@ public class Drivesafe {
 
     }
 
+    /* LOG TAG */
+    public class TAG{
+        public static final String RESULT_IS = "Result Is $_ ";
+    }
+
     // --* Prototype Method. -> Not Finalized
-    public static Accident rescuseRequest(Context context, double latitude, double longitude, double forceDetect, float speedDetect) {
+    public static Accident crashRescuseRequest(Context context, double latitude, double longitude, double forceDetect, float speedDetect) {
         String response = null;
         try {
             response = Ion.with(context)
@@ -66,11 +71,30 @@ public class Drivesafe {
 
     public static boolean setSystemFalseAccident(Context context, Accident accident) {
         try {
-            return Boolean.parseBoolean(Ion.with(context)
-            .load(URI.SYS_FALSE_CRASH)
-            .setBodyParameter("accid", String.valueOf(accident.getAccId()))
-            .asString()
-            .get().trim());
+            boolean isSuccess =  Boolean.parseBoolean(Ion.with(context)
+                    .load(URI.SYS_FALSE_CRASH)
+                    .setBodyParameter("accid", String.valueOf(accident.getAccidentId()))
+                    .asString()
+                    .get().trim());
+
+            return isSuccess;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean setUserFalseAccident(Context context, Accident accident) {
+        try {
+            boolean isSuccess =  Boolean.parseBoolean(Ion.with(context)
+                    .load(URI.USR_FALSE_CRASH)
+                    .setBodyParameter("accid", String.valueOf(accident.getAccidentId()))
+                    .asString()
+                    .get().trim());
+
+            return isSuccess;
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

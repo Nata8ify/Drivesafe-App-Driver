@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Drivesafe</string>
+    <string name="app_name">Weeworh</string>
 
     <!--Login-->
     <string name="login_username">Username</string>
@@ -13,6 +13,19 @@
     <string name="main_drvactiveserv">Activate Drivesafe As Service</string>
     <string name="main_drvdeactive">Deactivate Drivesafe</string>
     <string name="main_drvpauseserv">Pause Drivesafe Service</string>
+    <string name="main_userfalse">This is False Accident</string>
+    <string-array name="main_calloption">
+        <item>Emergency Request</item>
+        <item>Report Another Incident</item>
+        <item>My Profile</item>
+    </string-array>
+    <!--Main_Report Dialog Option-->
+    <string name="main_report_title">Type Of Incident</string>
+    <string name="main_report_carcrash_opt">Crash</string>
+    <string name="main_report_fire_opt">Fire</string>
+    <string name="main_report_patient_opt">Patient</string>
+    <string name="main_report_animal_opt">Animal</string>
+    <string name="main_report_other_opt">Other</string>
 
     <!--Simple-->
     <string name="ok">OKAY</string>

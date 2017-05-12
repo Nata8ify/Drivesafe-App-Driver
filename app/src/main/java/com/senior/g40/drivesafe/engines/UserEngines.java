@@ -1,13 +1,10 @@
 package com.senior.g40.drivesafe.engines;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.ion.Ion;
 import com.senior.g40.drivesafe.models.Profile;
-import com.senior.g40.drivesafe.models.User;
 import com.senior.g40.drivesafe.utils.Drivesafe;
 
 import java.util.concurrent.ExecutionException;

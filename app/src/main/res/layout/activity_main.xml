@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:rsv="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,31 +14,67 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <com.github.channguyen.rsv.RangeSliderView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/skbar_seekreq"
+                rsv:filledColor="#ddd"
+                rsv:rangeCount="3"/>
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/frgmnt_reportopt_view"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/txt_gs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left" />
+            <Button
+                android:id="@+id/btn_activeDrivesafe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/main_drvactive" />
+            <Button
+                android:id="@+id/btn_userfalse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/main_userfalse" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/txt_app"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:textStyle="bold"
-            android:text=" Drivesafe 0.12 Alpha \n Latest Updated : 22 April 2017 \n Activity : MainActivity \n Layout : activity_main.xml \n"/>
-        <TextView
-            android:id="@+id/txt_gs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left" />
 
-        <Button
-            android:id="@+id/btn_activeDrivesafe"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/main_drvactive" />
+
 
         <Button
             android:id="@+id/btn_activeDrivesafeService"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/main_drvactiveserv" />
+            android:text="@string/main_drvactiveserv"
+            android:visibility="gone" />
     </LinearLayout>
 </LinearLayout>

@@ -1,7 +1,5 @@
 package com.senior.g40.drivesafe.utils;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -9,7 +7,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
 
 /**
  * Created by PNattawut on 26-Mar-17.

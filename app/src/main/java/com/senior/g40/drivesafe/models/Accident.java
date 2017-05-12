@@ -13,27 +13,34 @@ import java.sql.Date;
  */
 public class Accident {
 
-    private long accId;
+    private long accidentId;
     private long userId;
     private Date date;
     private String time;
     private float latitude;
-    private float longtitude;
+    private float longitude;
     private float forceDetect;
     private float speedDetect;
-    //-- accCode is have very importance role.
+    //-- accCode & accType is have very importance role.
+    private byte accType;
     private char accCode;
-    
+
+    public static final byte ACC_TYPE_TRAFFIC = 1;
+    public static final byte ACC_TYPE_FIRE = 2;
+    public static final byte ACC_TYPE_BRAWL = 3;
+    public static final byte ACC_TYPE_ANIMAL = 4;
+    public static final byte ACC_TYPE_OTHER = 5;
+
     public static char ACC_CODE_A = 'A';
     public static char ACC_CODE_G = 'G';
     public static char ACC_CODE_R = 'R';
     public static char ACC_CODE_C = 'C';
     public static char ACC_CODE_ERRU = '1';
     public static char ACC_CODE_ERRS = '2';
-    //A[Accident]: Pending for rescue, 
-    //G[Going]: Rescuer is on the way, 
-    //R[Resecue]: Rescuer is rescuing, 
-    //C[Clear]: Rescue received, marking will be cleared next time.  
+    //A[Accident]: Pending for rescue,
+    //G[Going]: Rescuer is on the way,
+    //R[Resecue]: Rescuer is rescuing,
+    //C[Clear]: Rescue received, marking will be cleared next time.
 //1[False on User]
 
     public static final float GS_SERIOUS = 60 ; // G's that cause the airbag deployed. [60]
@@ -43,14 +50,16 @@ public class Accident {
     public Accident() {
     }
 
-    public Accident(long userId, Date date, String time, float latitude, float longtitude, float forceDetect, float speedDetect, char accCode) {
+    public Accident(long accId, long userId, Date date, String time, float latitude, float longtitude, float forceDetect, float speedDetect, byte accType, char accCode) {
+        this.accidentId = accId;
         this.userId = userId;
         this.date = date;
         this.time = time;
         this.latitude = latitude;
-        this.longtitude = longtitude;
+        this.longitude = longtitude;
         this.forceDetect = forceDetect;
         this.speedDetect = speedDetect;
+        this.accType = accType;
         this.accCode = accCode;
     }
 
@@ -66,13 +75,12 @@ public class Accident {
         return accident;
     }
 
-
-    public long getAccId() {
-        return accId;
+    public long getAccidentId() {
+        return accidentId;
     }
 
-    public void setAccId(long accId) {
-        this.accId = accId;
+    public void setAccidentId(long accidentId) {
+        this.accidentId = accidentId;
     }
 
     public long getUserId() {
@@ -99,7 +107,7 @@ public class Accident {
         this.time = time;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
@@ -107,15 +115,15 @@ public class Accident {
         this.latitude = latitude;
     }
 
-    public float getLongtitude() {
-        return longtitude;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setLongtitude(float longtitude) {
-        this.longtitude = longtitude;
+    public void setLongtitude(float longitude) {
+        this.longitude = longitude;
     }
 
-    public float getForceDetect() {
+    public double getForceDetect() {
         return forceDetect;
     }
 
@@ -139,9 +147,16 @@ public class Accident {
         this.accCode = accCode;
     }
 
-    @Override
-    public String toString() {
-        return "Accident{" + "userId=" + userId + ", date=" + date + ", time=" + time + ", latitude=" + latitude + ", longtitude=" + longtitude + ", forceDetect=" + forceDetect + ", speedDetect=" + speedDetect + ", accCode=" + accCode + '}';
+    public byte getAccType() {
+        return accType;
     }
 
+    public void setAccType(byte accType) {
+        this.accType = accType;
+    }
+
+    @Override
+    public String toString() {
+        return "Accident{" + "accidentId=" + accidentId + ", userId=" + userId + ", date=" + date + ", time=" + time + ", latitude=" + latitude + ", longitude=" + longitude + ", forceDetect=" + forceDetect + ", speedDetect=" + speedDetect + ", accType=" + accType + ", accCode=" + accCode + '}';
+    }
 }
