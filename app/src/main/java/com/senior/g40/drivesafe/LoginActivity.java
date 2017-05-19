@@ -11,8 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.senior.g40.drivesafe.engines.UserEngines;
-import com.senior.g40.drivesafe.utils.Drivesafe;
 import com.senior.g40.drivesafe.utils.SettingVerify;
+import com.senior.g40.drivesafe.weeworh.WWProp;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     break;
                 case R.id.btn_register:
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Drivesafe.DRIVESAFE_HOST)));
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(WWProp.WEEWORH_HOST)));
                     break;
             }
 

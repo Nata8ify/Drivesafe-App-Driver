@@ -8,7 +8,9 @@ import android.net.ConnectivityManager;
  */
 
 public class SettingVerify {
-    public static boolean isNetworkConnected(Context context){
-        return ((ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
+
+    public static boolean isNetworkConnected(Context context) {
+        return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
     }
+
 }

@@ -5,6 +5,8 @@
  */
 package com.senior.g40.drivesafe.models;
 
+import com.google.gson.GsonBuilder;
+
 import java.sql.Date;
 
 /**
@@ -17,11 +19,11 @@ public class Accident {
     private long userId;
     private Date date;
     private String time;
-    private float latitude;
-    private float longitude;
-    private float forceDetect;
+    private double latitude;
+    private double longitude;
+    private double forceDetect;
     private float speedDetect;
-    //-- accCode & accType is have very importance role.
+    /*-- accCode & accType is have very importance role.*/
     private byte accType;
     private char accCode;
 
@@ -29,38 +31,32 @@ public class Accident {
     public static final byte ACC_TYPE_FIRE = 2;
     public static final byte ACC_TYPE_BRAWL = 3;
     public static final byte ACC_TYPE_ANIMAL = 4;
-    public static final byte ACC_TYPE_OTHER = 5;
+    public static final byte ACC_TYPE_PATIENT = 5;
+    public static final byte ACC_TYPE_OTHER = 99;
 
-    public static char ACC_CODE_A = 'A';
-    public static char ACC_CODE_G = 'G';
-    public static char ACC_CODE_R = 'R';
-    public static char ACC_CODE_C = 'C';
-    public static char ACC_CODE_ERRU = '1';
-    public static char ACC_CODE_ERRS = '2';
-    //A[Accident]: Pending for rescue,
-    //G[Going]: Rescuer is on the way,
-    //R[Resecue]: Rescuer is rescuing,
-    //C[Clear]: Rescue received, marking will be cleared next time.
-//1[False on User]
+    /** A[Accident]: Pending for rescue */
+    public static final char ACC_CODE_A = 'A';
 
-    public static final float GS_SERIOUS = 60 ; // G's that cause the airbag deployed. [60]
-    public static final float GS_DEBUG = 3 ;
+    /** G[Going]: Rescuer is on the way,  */
+    public static final char ACC_CODE_G = 'G';
+
+    /** R[Rescue]: Rescuer is rescuing,  */
+    public static final char ACC_CODE_R = 'R';
+
+    /** C[Clear]: Rescue received, marking will be cleared next time.   */
+    public static final char ACC_CODE_C = 'C';
+
+    /** 1[False on User] */
+    public static final char ACC_CODE_ERRU = 'U';
+
+    /** 2[False on System] */
+    public static final char ACC_CODE_ERRS = 'S';
+
+
+
     private static Accident accident;
 
     public Accident() {
-    }
-
-    public Accident(long accId, long userId, Date date, String time, float latitude, float longtitude, float forceDetect, float speedDetect, byte accType, char accCode) {
-        this.accidentId = accId;
-        this.userId = userId;
-        this.date = date;
-        this.time = time;
-        this.latitude = latitude;
-        this.longitude = longtitude;
-        this.forceDetect = forceDetect;
-        this.speedDetect = speedDetect;
-        this.accType = accType;
-        this.accCode = accCode;
     }
 
     public static Accident getInsatance() {
@@ -70,10 +66,7 @@ public class Accident {
         return accident;
     }
 
-    public static Accident setInstance(Accident accident) {
-        Accident.accident = accident;
-        return accident;
-    }
+
 
     public long getAccidentId() {
         return accidentId;
@@ -158,5 +151,18 @@ public class Accident {
     @Override
     public String toString() {
         return "Accident{" + "accidentId=" + accidentId + ", userId=" + userId + ", date=" + date + ", time=" + time + ", latitude=" + latitude + ", longitude=" + longitude + ", forceDetect=" + forceDetect + ", speedDetect=" + speedDetect + ", accType=" + accType + ", accCode=" + accCode + '}';
+    }
+
+    public String toJson(){
+        return new GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(this);
+    }
+
+    /* Independence with Web Model. */
+    public static final float GS_SERIOUS = 60 ; // G's that cause the airbag deployed. [60]
+    public static final float GS_DEBUG = 3 ;
+
+    public static Accident setInstance(Accident accident) {
+        Accident.accident = accident;
+        return accident;
     }
 }

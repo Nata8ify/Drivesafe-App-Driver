@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 import com.senior.g40.drivesafe.R;
 import com.senior.g40.drivesafe.models.Accident;
-import com.senior.g40.drivesafe.utils.Drivesafe;
 import com.senior.g40.drivesafe.utils.LocationUtils;
+import com.senior.g40.drivesafe.weeworh.WWTo;
 
 /**
  * Created by PNattawut on 16-Mar-17.
@@ -88,7 +88,7 @@ public class CrashingSensorEngines implements SensorEventListener {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Accident.setInstance(Drivesafe.crashRescuseRequest(context, accLocationUtils.getLat(), accLocationUtils.getLng(), Math.round(fixedGs), accLocationUtils.getSpeed()));
+                        Accident.setInstance(WWTo.crashRescuseRequest(context, accLocationUtils.getLat(), accLocationUtils.getLng(), Math.round(fixedGs), accLocationUtils.getSpeed()));
                         Toast.makeText(context, "Accident Information Saved." + Accident.getInsatance().toString(), Toast.LENGTH_LONG).show();
                         Log.v("Accident.getInsatance()", Accident.getInsatance().toString());
                         reqState = false;
@@ -124,7 +124,7 @@ public class CrashingSensorEngines implements SensorEventListener {
             public void run() {
                 if (accLocationUtils.getSpeed() > 0) {
                     Toast.makeText(context, "False Accident Detected" + accLocationUtils.getLng(), Toast.LENGTH_LONG).show();
-                    boolean isSuccess = Drivesafe.setSystemFalseAccident(context, Accident.getInsatance());
+                    boolean isSuccess = WWTo.setSystemFalseAccident(context, Accident.getInsatance());
                     Log.v("isSuccess: ", isSuccess + "");
                     try {
                         Thread.sleep(10000L);

@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -17,13 +16,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.channguyen.rsv.RangeSliderView;
 import com.senior.g40.drivesafe.engines.CrashingSensorEngines;
 import com.senior.g40.drivesafe.models.Accident;
 import com.senior.g40.drivesafe.services.CrashDetectionService;
-import com.senior.g40.drivesafe.utils.Drivesafe;
 import com.senior.g40.drivesafe.utils.LocationUtils;
 import com.senior.g40.drivesafe.utils.SettingVerify;
+import com.senior.g40.drivesafe.weeworh.WWTo;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,10 +38,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnActiveDrivesafeService;
     @BindView(R.id.activity_main)
     LinearLayout activityMain;
-    @BindView(R.id.btn_userfalse)
-    Button btnUserfalse;
-    @BindView(R.id.skbar_seekreq)
-    RangeSliderView skbarSeekreq;
+
 
     private CrashingSensorEngines crashingSensorEngines;
 
@@ -57,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         this.context = this;
         validatePermission();
-        manageReportIncidentView();
         crashingSensorEngines = CrashingSensorEngines.getInstance(this);
         crashingSensorEngines.setTxtviewOut(txtGs);
     }
@@ -134,41 +128,47 @@ public class MainActivity extends AppCompatActivity {
     public void onViewClicked() {
         if (SettingVerify.isNetworkConnected(this)) {
             Log.v(">>>>", Accident.getInsatance().toString());
-            Drivesafe.setUserFalseAccident(this, Accident.getInsatance());
+            if(WWTo.setUserFalseAccident(this, Accident.getInsatance())){
+                toast("Success!");
+            } else {
+                toast(":(");
+            }
         }
     }
 
-    /* Report Incident */
-    private final int REPORT_NORMAL = 1;
-    private final int REPORT_EMERGE = 2;
-    private void manageReportIncidentView() {
-        skbarSeekreq.setOnSlideListener(new RangeSliderView.OnSlideListener() {
-            @Override
-            public void onSlide(int index) {
-                switch (index){
-                    case REPORT_NORMAL :
 
-                        break;
-                    case REPORT_EMERGE :
-                        initialReportDialog();
-                        break;
-                    default: toast("No Report Case");
-                }
-            }
-        });
-    }
-
-    private void initialReportDialog(){
-        Dialog optionDialog = new Dialog(context);
-        optionDialog.setContentView(R.layout.view_report_option);
-        optionDialog.setTitle(R.string.main_report_title);
-
-        Button btnCrashOpt = (Button)optionDialog.findViewById(R.id.btn_crash_opt);
-        Button btnFireOpt = (Button)optionDialog.findViewById(R.id.btn_fire_opt);
-        Button btnPatientOpt = (Button)optionDialog.findViewById(R.id.btn_patient_opt);
-        Button btnAnimalOpt = (Button)optionDialog.findViewById(R.id.btn_animal_opt);
-        Button btnOtherOpt = (Button)optionDialog.findViewById(R.id.btn_other_opt);
-
-        optionDialog.show();
+    @BindView(R.id.btn_userfalse)
+    Button btnUserfalse;
+    @BindView(R.id.btn_crash_opt)
+    Button btnCrashOpt;
+    @BindView(R.id.btn_fire_opt)
+    Button btnFireOpt;
+    @BindView(R.id.btn_patient_opt)
+    Button btnPatientOpt;
+    @BindView(R.id.btn_animal_opt)
+    Button btnAnimalOpt;
+    @BindView(R.id.btn_other_opt)
+    Button btnOtherOpt;
+    @OnClick({R.id.btn_crash_opt, R.id.btn_fire_opt, R.id.btn_patient_opt, R.id.btn_animal_opt, R.id.btn_other_opt})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_crash_opt:
+                Accident crashAcc = WWTo.crashRescueRequest(context, LocationUtils.getInstance(context).getLat(), LocationUtils.getInstance(context).getLng());
+                Accident.setInstance(crashAcc);
+                toast(crashAcc.toString());
+                break;
+            case R.id.btn_fire_opt:
+                toast(""+R.id.btn_fire_opt);
+                break;
+            case R.id.btn_patient_opt:
+                toast(""+R.id.btn_patient_opt);
+                break;
+            case R.id.btn_animal_opt:
+                toast(""+R.id.btn_animal_opt);
+                break;
+            case R.id.btn_other_opt:
+                toast(""+R.id.btn_other_opt);
+                break;
+        }
     }
 }

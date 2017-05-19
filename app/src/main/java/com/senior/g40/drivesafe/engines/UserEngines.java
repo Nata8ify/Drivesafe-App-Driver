@@ -5,7 +5,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.koushikdutta.ion.Ion;
 import com.senior.g40.drivesafe.models.Profile;
-import com.senior.g40.drivesafe.utils.Drivesafe;
+import com.senior.g40.drivesafe.weeworh.WWProp;
 
 import java.util.concurrent.ExecutionException;
 
@@ -29,9 +29,9 @@ public class UserEngines {
         String callback = null;
         try {
             callback = Ion.with(appContext)
-                    .load(Drivesafe.URI.LOGIN)
-                    .setBodyParameter(Drivesafe.PARAM.USRN, username)
-                    .setBodyParameter(Drivesafe.PARAM.PSWD, password)
+                    .load(WWProp.URI.LOGIN)
+                    .setBodyParameter(WWProp.PARAM.USRN, username)
+                    .setBodyParameter(WWProp.PARAM.PSWD, password)
                     .asString()
                     .get();
             Gson gson = new Gson();

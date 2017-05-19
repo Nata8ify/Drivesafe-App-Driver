@@ -1,12 +1,15 @@
 package com.senior.g40.drivesafe.utils;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 
 /**
  * Created by PNattawut on 26-Mar-17.
@@ -63,10 +66,18 @@ public class LocationUtils {
     }
 
     public void startLocationUpdate() {
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            return;
+        }
         accLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, accLocationListener);
     }
 
     public void stopLocationUpdate() {
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            return;
+        }
         accLocationManager.removeUpdates(accLocationListener);
     }
 
