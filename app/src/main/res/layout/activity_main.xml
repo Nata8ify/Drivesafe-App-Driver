@@ -61,6 +61,12 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/main_report_animal_opt" />
+                <Button
+                    android:id="@+id/btn_brawl_opt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/main_report_brawl_opt" />
             </LinearLayout>
 
             <LinearLayout
@@ -87,16 +93,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left" />
+
             <Button
                 android:id="@+id/btn_activeDrivesafe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/main_drvactive" />
+
             <Button
                 android:id="@+id/btn_userfalse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/main_userfalse" />
+
         </LinearLayout>
 
         <LinearLayout

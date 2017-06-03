@@ -30,7 +30,7 @@ public class WWTo {
      * @param speedDetect Value of Speed can Detected After Crash was Occurred
      * @return The Incident Information after it was stored.
      */
-    public static Accident crashRescuseRequest(@NonNull Context context, @NonNull double latitude, @NonNull double longitude, @NonNull double forceDetect, @NonNull float speedDetect) {
+    public static Accident crashRescueRequest(@NonNull Context context, @NonNull double latitude, @NonNull double longitude, @NonNull double forceDetect, @NonNull float speedDetect) {
         String response = null;
         try {
             response = Ion.with(context)
@@ -92,7 +92,57 @@ public class WWTo {
      * @return The Incident Information after it was stored.
      */
     public static Accident fireRescueRequest(@NonNull Context context, @NonNull double latitude, @NonNull double longitude) {
-        return new Accident();
+        String response = null;
+        Log.v("latlng", latitude + "::::" + longitude + "::" + String.valueOf(Accident.ACC_TYPE_FIRE));
+        try {
+            response = Ion.with(context)
+                    .load(WWProp.URI.INCIDENT_REPORT)
+                    .setBodyParameter(WWProp.PARAM.USRID, String.valueOf(Profile.getInsatance().getUserId()))
+                    .setBodyParameter(WWProp.PARAM.LAT, String.valueOf(latitude))
+                    .setBodyParameter(WWProp.PARAM.LNG, String.valueOf(longitude))
+                    .setBodyParameter(WWProp.PARAM.ACTYP, String.valueOf(Accident.ACC_TYPE_FIRE))
+                    .asString()
+                    .get();
+            Log.v("res", response);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            Log.v("res 1", response);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            Log.v("res 2", response);
+        }
+        return new GsonBuilder().setDateFormat("yyyy-MM-dd").create().fromJson(response, Accident.class);
+    }
+
+    /**
+     * Report Brawl Incident
+     *
+     * @param context   Sending Activity's Context.
+     * @param latitude  Incident Location's Latitude.
+     * @param longitude Incident Location's Longitude.
+     * @return The Incident Information after it was stored.
+     */
+    public static Accident brawlRescueRequest(@NonNull Context context, @NonNull double latitude, @NonNull double longitude) {
+        String response = null;
+        Log.v("latlng", latitude + "::::" + longitude + "::" + String.valueOf(Accident.ACC_TYPE_BRAWL));
+        try {
+            response = Ion.with(context)
+                    .load(WWProp.URI.INCIDENT_REPORT)
+                    .setBodyParameter(WWProp.PARAM.USRID, String.valueOf(Profile.getInsatance().getUserId()))
+                    .setBodyParameter(WWProp.PARAM.LAT, String.valueOf(latitude))
+                    .setBodyParameter(WWProp.PARAM.LNG, String.valueOf(longitude))
+                    .setBodyParameter(WWProp.PARAM.ACTYP, String.valueOf(Accident.ACC_TYPE_BRAWL))
+                    .asString()
+                    .get();
+            Log.v("res", response);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            Log.v("res 1", response);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            Log.v("res 2", response);
+        }
+        return new GsonBuilder().setDateFormat("yyyy-MM-dd").create().fromJson(response, Accident.class);
     }
 
     /**
@@ -104,7 +154,26 @@ public class WWTo {
      * @return The Incident Information after it was stored.
      */
     public static Accident animalRescueRequest(@NonNull Context context, @NonNull double latitude, @NonNull double longitude) {
-        return new Accident();
+        String response = null;
+        Log.v("latlng", latitude + "::::" + longitude + "::" + String.valueOf(Accident.ACC_TYPE_ANIMAL));
+        try {
+            response = Ion.with(context)
+                    .load(WWProp.URI.INCIDENT_REPORT)
+                    .setBodyParameter(WWProp.PARAM.USRID, String.valueOf(Profile.getInsatance().getUserId()))
+                    .setBodyParameter(WWProp.PARAM.LAT, String.valueOf(latitude))
+                    .setBodyParameter(WWProp.PARAM.LNG, String.valueOf(longitude))
+                    .setBodyParameter(WWProp.PARAM.ACTYP, String.valueOf(Accident.ACC_TYPE_ANIMAL))
+                    .asString()
+                    .get();
+            Log.v("res", response);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            Log.v("res 1", response);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            Log.v("res 2", response);
+        }
+        return new GsonBuilder().setDateFormat("yyyy-MM-dd").create().fromJson(response, Accident.class);
     }
 
     /**
@@ -116,7 +185,26 @@ public class WWTo {
      * @return The Incident Information after it was stored.
      */
     public static Accident patientRescueRequest(@NonNull Context context, @NonNull double latitude, @NonNull double longitude) {
-        return new Accident();
+        String response = null;
+        Log.v("latlng", latitude + "::::" + longitude + "::" + String.valueOf(Accident.ACC_TYPE_PATIENT));
+        try {
+            response = Ion.with(context)
+                    .load(WWProp.URI.INCIDENT_REPORT)
+                    .setBodyParameter(WWProp.PARAM.USRID, String.valueOf(Profile.getInsatance().getUserId()))
+                    .setBodyParameter(WWProp.PARAM.LAT, String.valueOf(latitude))
+                    .setBodyParameter(WWProp.PARAM.LNG, String.valueOf(longitude))
+                    .setBodyParameter(WWProp.PARAM.ACTYP, String.valueOf(Accident.ACC_TYPE_PATIENT))
+                    .asString()
+                    .get();
+            Log.v("res", response);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            Log.v("res 1", response);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            Log.v("res 2", response);
+        }
+        return new GsonBuilder().setDateFormat("yyyy-MM-dd").create().fromJson(response, Accident.class);
     }
 
     /**
@@ -128,7 +216,26 @@ public class WWTo {
      * @return The Incident Information after it was stored.
      */
     public static Accident otherRescueRequest(@NonNull Context context, @NonNull double latitude, @NonNull double longitude) {
-        return new Accident();
+        String response = null;
+        Log.v("latlng", latitude + "::::" + longitude + "::" + String.valueOf(Accident.ACC_TYPE_OTHER));
+        try {
+            response = Ion.with(context)
+                    .load(WWProp.URI.INCIDENT_REPORT)
+                    .setBodyParameter(WWProp.PARAM.USRID, String.valueOf(Profile.getInsatance().getUserId()))
+                    .setBodyParameter(WWProp.PARAM.LAT, String.valueOf(latitude))
+                    .setBodyParameter(WWProp.PARAM.LNG, String.valueOf(longitude))
+                    .setBodyParameter(WWProp.PARAM.ACTYP, String.valueOf(Accident.ACC_TYPE_OTHER))
+                    .asString()
+                    .get();
+            Log.v("res", response);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            Log.v("res 1", response);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            Log.v("res 2", response);
+        }
+        return new GsonBuilder().setDateFormat("yyyy-MM-dd").create().fromJson(response, Accident.class);
     }
 
     public static boolean setSystemFalseAccident(Context context, Accident accident) {

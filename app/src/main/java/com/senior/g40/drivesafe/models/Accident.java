@@ -59,7 +59,7 @@ public class Accident {
     public Accident() {
     }
 
-    public static Accident getInsatance() {
+    public static Accident getInstance() {
         if (accident == null) {
             accident = new Accident();
         }

@@ -86,4 +86,5 @@ public class CrashDetectionService extends IntentService implements SensorEventL
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
+
 }

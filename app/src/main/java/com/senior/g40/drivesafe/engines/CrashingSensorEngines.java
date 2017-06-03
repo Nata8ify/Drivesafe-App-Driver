@@ -1,5 +1,6 @@
 package com.senior.g40.drivesafe.engines;
 
+
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -70,7 +71,7 @@ public class CrashingSensorEngines implements SensorEventListener {
     public String verbose;
 
     @Override
-    public void onSensorChanged(SensorEvent event) {
+    public void onSensorChanged(SensorEvent event){
         accX = event.values[0];
         accY = event.values[1];
         accZ = event.values[2];
@@ -88,9 +89,9 @@ public class CrashingSensorEngines implements SensorEventListener {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Accident.setInstance(WWTo.crashRescuseRequest(context, accLocationUtils.getLat(), accLocationUtils.getLng(), Math.round(fixedGs), accLocationUtils.getSpeed()));
-                        Toast.makeText(context, "Accident Information Saved." + Accident.getInsatance().toString(), Toast.LENGTH_LONG).show();
-                        Log.v("Accident.getInsatance()", Accident.getInsatance().toString());
+                        Accident.setInstance(WWTo.crashRescueRequest(context, accLocationUtils.getLat(), accLocationUtils.getLng(), Math.round(fixedGs), accLocationUtils.getSpeed()));
+                        Toast.makeText(context, "Accident Information Saved." + Accident.getInstance().toString(), Toast.LENGTH_LONG).show();
+                        Log.v("Accident.getInsatance()", Accident.getInstance().toString());
                         reqState = false;
                         falseWatcher();
                     }
@@ -98,7 +99,6 @@ public class CrashingSensorEngines implements SensorEventListener {
             }
         } else {
             this.txtOut.setText("Service is Starting...");
-//            verbose = "Service is Starting..."; //Move the Sensor thing into Service?
         }
     }
 
@@ -124,7 +124,7 @@ public class CrashingSensorEngines implements SensorEventListener {
             public void run() {
                 if (accLocationUtils.getSpeed() > 0) {
                     Toast.makeText(context, "False Accident Detected" + accLocationUtils.getLng(), Toast.LENGTH_LONG).show();
-                    boolean isSuccess = WWTo.setSystemFalseAccident(context, Accident.getInsatance());
+                    boolean isSuccess = WWTo.setSystemFalseAccident(context, Accident.getInstance());
                     Log.v("isSuccess: ", isSuccess + "");
                     try {
                         Thread.sleep(10000L);
@@ -139,5 +139,5 @@ public class CrashingSensorEngines implements SensorEventListener {
         };
         falseWatcherHandler.post(falseWatcherRunnable);
     }
-
 }
+

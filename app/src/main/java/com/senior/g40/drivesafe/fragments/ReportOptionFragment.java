@@ -5,4 +5,5 @@ package com.senior.g40.drivesafe.fragments;
  */
 
 public class ReportOptionFragment {
+
 }

@@ -26,6 +26,7 @@
     <string name="main_report_patient_opt">Patient</string>
     <string name="main_report_animal_opt">Animal</string>
     <string name="main_report_other_opt">Other</string>
+    <string name="main_report_brawl_opt">Brawl</string>
 
     <!--Simple-->
     <string name="ok">OKAY</string>
