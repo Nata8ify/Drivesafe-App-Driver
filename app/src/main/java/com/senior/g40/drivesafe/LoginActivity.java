@@ -63,14 +63,9 @@ public class LoginActivity extends AppCompatActivity {
         }else{
             if(view.getId() == R.id.btn_login || view.getId() == R.id.btn_register){
                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                    builder.setMessage("Internet not connected");
+                    builder.setMessage("No internet connection. Please turn the internet wifi or 3G/4G to use this application.");
                     builder.setPositiveButton("ok",new DialogInterface.OnClickListener(){
                         public void onClick(DialogInterface dialog,int id){
-                            dialog.dismiss();
-                        }
-                    });
-                    builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener(){
-                        public void onClick(DialogInterface dialog,int which){
                             dialog.dismiss();
                         }
                     });
