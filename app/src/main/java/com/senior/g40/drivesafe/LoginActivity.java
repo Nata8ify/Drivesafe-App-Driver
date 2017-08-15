@@ -1,8 +1,10 @@
 package com.senior.g40.drivesafe;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -42,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick({R.id.btn_login, R.id.btn_register})
     public void onClick(View view) {
-        if (!SettingVerify.isNetworkConnected(this)) {return;}
+        if (SettingVerify.isNetworkConnected(this)){
             switch (view.getId()) {
                 case R.id.btn_login:
                     if (UserEngines.getInstance(this)
@@ -58,6 +60,22 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(WWProp.WEEWORH_HOST)));
                     break;
             }
-
+        }else{
+            if(view.getId() == R.id.btn_login || view.getId() == R.id.btn_register){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                    builder.setMessage("Internet not connected");
+                    builder.setPositiveButton("ok",new DialogInterface.OnClickListener(){
+                        public void onClick(DialogInterface dialog,int id){
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener(){
+                        public void onClick(DialogInterface dialog,int which){
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.show();
+            }
+        }return;
     }
 }
