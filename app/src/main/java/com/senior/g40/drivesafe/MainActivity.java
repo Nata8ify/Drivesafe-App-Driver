@@ -1,14 +1,15 @@
 package com.senior.g40.drivesafe;
 
 import android.Manifest;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -51,13 +52,29 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         ButterKnife.bind(this);
         this.context = this;
         validatePermission();
         crashingSensorEngines = CrashingSensorEngines.getInstance(this);
         crashingSensorEngines.setTxtviewOut(txtGs);
         startService(new Intent(this, MainActivity.class));
+
+        ReportFragment rp = new ReportFragment();
+        FragmentManager fragMgr = getSupportFragmentManager();
+        FragmentTransaction ft = fragMgr.beginTransaction();
+        ft.add(R.id.fragment_container, rp);
+        ft.commit();
     }
+
+    /*@Override
+    public Fragment getItem(int position){
+        switch (position){
+            case 0 : return new ReportFragment();
+            case 1 : return new ActivateFragment();
+        }
+        return null;
+    }*/
 
     private int activateServiceState;
 
