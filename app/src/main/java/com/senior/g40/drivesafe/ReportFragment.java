@@ -18,4 +18,9 @@ public class ReportFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_report,container,false);
 
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 }
+
