@@ -10,10 +10,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +23,8 @@ import android.widget.Toast;
 
 
 import com.senior.g40.drivesafe.engines.CrashingSensorEngines;
+import com.senior.g40.drivesafe.fragments.ActivateFragment;
+import com.senior.g40.drivesafe.fragments.ReportFragment;
 import com.senior.g40.drivesafe.models.Accident;
 import com.senior.g40.drivesafe.services.CrashDetectionService;
 import com.senior.g40.drivesafe.utils.LocationUtils;
