@@ -6,7 +6,7 @@ package com.senior.g40.drivesafe.weeworh;
 
 public class WWProp {
 //        public static final String WEEWORH_HOST = "wwh.nata8ify.me/";
-    public static final String WEEWORH_HOST = "http://54.169.83.168:8080/WeeWorh-1.0-SNAPSHOT/";
+    public static final String WEEWORH_HOST = "http://54.254.187.201:8080/WeeWorh-1.0-SNAPSHOT/";
 
     public class URI {
         public static final String LOGIN = WEEWORH_HOST + "DriverIn?opt=login&utyp=M";
