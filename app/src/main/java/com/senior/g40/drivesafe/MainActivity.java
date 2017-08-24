@@ -119,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
             return 2;
         }
 
@@ -134,15 +133,6 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
     }
-
-    /*@Override
-    public Fragment getItem(int position){
-        switch (position){
-            case 0 : return new ReportFragment();
-            case 1 : return new ActivateFragment();
-        }
-        return null;
-    }*/
 
     private int activateServiceState;
 
@@ -208,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void toast(String msg) {
+
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 
