@@ -10,30 +10,46 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:orientation="vertical">
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:weightSum="1">
+
         <TextView
-            android:id="@+id/txt_gs"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="left" />
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Drivesafe mode"
+            android:textSize="30dp"
+            android:layout_marginTop="40dp"/>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3"
-        android:orientation="vertical">
-    <Button
-        android:id="@+id/btn_activeDrivesafe"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/main_drvactive" />
+        android:orientation="vertical"
+        android:gravity="center">
+        <Button
+            android:id="@+id/btn_activeDrivesafe"
+            android:layout_width="270dp"
+            android:layout_height="270dp"
+            android:text="@string/main_drvactive"
+            android:background="@drawable/round_button"
+            android:textSize="20dp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_weight="3">
+        android:layout_weight="5">
+
+        <TextView
+            android:id="@+id/txt_gs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
         <Button
             android:id="@+id/btn_activeDrivesafeService"
             android:layout_width="match_parent"

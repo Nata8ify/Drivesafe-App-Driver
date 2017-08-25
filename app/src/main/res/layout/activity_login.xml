@@ -11,16 +11,24 @@
     android:orientation="vertical"
     tools:context="com.senior.g40.drivesafe.LoginActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Drivesafe Prototype"
-        android:layout_gravity="center"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="50dp">
+        android:padding="10dp">
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/icon"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,11 +52,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btn_login"
-            android:text="@string/login_login"/>
+            android:text="@string/login_login"
+            style="@style/btn_login"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btn_register"
-            android:text="@string/login_register"/>
+            android:text="@string/login_register"
+            style="@style/btn_login"/>
+
+
+
+
+
+
     </LinearLayout>
 </LinearLayout>

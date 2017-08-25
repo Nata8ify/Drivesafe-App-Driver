@@ -8,59 +8,72 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="5dp">
 
                 <Button
                     android:id="@+id/btn_crash_opt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/main_report_carcrash_opt"/>
+                    android:text="@string/main_report_carcrash_opt"
+                    style="@style/btn_login"/>
 
                 <Button
                     android:id="@+id/btn_fire_opt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/main_report_fire_opt" />
+                    android:text="@string/main_report_fire_opt"
+                    style="@style/btn_login"/>
 
                 <Button
                     android:id="@+id/btn_patient_opt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/main_report_patient_opt" />
+                    android:text="@string/main_report_patient_opt"
+                    style="@style/btn_login"/>
 
                 <Button
                     android:id="@+id/btn_animal_opt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/main_report_animal_opt" />
+                    android:text="@string/main_report_animal_opt"
+                    style="@style/btn_login"/>
                 <Button
                     android:id="@+id/btn_brawl_opt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/main_report_brawl_opt" />
+                    android:text="@string/main_report_brawl_opt"
+                    style="@style/btn_login"/>
 
                 <Button
                     android:id="@+id/btn_other_opt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/main_report_other_opt" />
+                    android:text="@string/main_report_other_opt"
+                    style="@style/btn_login"/>
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="vertical">
                 <Button
                     android:id="@+id/btn_userfalse"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/main_userfalse"
-                    android:layout_weight="1"/>
+                    style="@style/btn_login"/>
+    </LinearLayout>
 
 
-        </LinearLayout>
 
 </LinearLayout>
