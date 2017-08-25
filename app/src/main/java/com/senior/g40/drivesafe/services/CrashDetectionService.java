@@ -44,6 +44,7 @@ public class CrashDetectionService extends IntentService {
         }
     };
 
+    private boolean isRequestDialogPrompted;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -56,10 +57,18 @@ public class CrashDetectionService extends IntentService {
                 sensorHandler.post(this);
                 isSensorActived = true;
                 if(CrashingSensorEngines.gs >= Accident.GS_DEBUG){
-                    Intent main = new Intent(CrashDetectionService.this, AlertActivity.class);
-                    main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(main);
-
+                    sensorHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            isRequestDialogPrompted = false;
+                        }
+                    }, 3000);
+                    if(!isRequestDialogPrompted) {
+                        Intent main = new Intent(CrashDetectionService.this, AlertActivity.class);
+                        main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(main);
+                        isRequestDialogPrompted = true;
+                    }
                 }
             }
         };
@@ -85,7 +94,6 @@ public class CrashDetectionService extends IntentService {
                     .setContentIntent(pdIntent)
                     .setContentTitle("Service Running")
                     .setContentText("Tap to Stop...").build();
-            NotificationManager mng = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
             startForeground(1, notification);
             sensorHandler.post(sensorRunnable);
         }return START_STICKY;
