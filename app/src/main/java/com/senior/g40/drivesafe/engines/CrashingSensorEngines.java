@@ -142,29 +142,11 @@ public class CrashingSensorEngines implements SensorEventListener {
                     }
                 });
                 alertDialog = builder.create();
-                try {
+               /* try {
                     alertDialog.show();
                 } catch(Exception exp){
-                }
-                new CountDownTimer(30000, 1000) {
+                }*/
 
-                        @Override
-                        public void onTick(long millisUntilFinished) {
-                            alertDialog.setMessage("You have "+"00:"+ (millisUntilFinished/1000)+" second to respond before the application auto send the accident location to the rescuer team." +
-                                    "If you want to call for help please tap 'Yes' if you don't want any help please tap 'No'");
-                        }
-
-                        @Override
-                        public void onFinish() {
-                            if(alertDialog.isShowing()==true) {
-                                Accident.setInstance(WWTo.crashRescueRequest(context, accLocationUtils.getLat(), accLocationUtils.getLng(), Math.round(fixedGs), accLocationUtils.getSpeed()));
-                                alertDialog.dismiss();
-                                Toast.makeText(context,"Accident Location send",Toast.LENGTH_LONG).show();
-                            }else{
-                                cancel();
-                            }
-                        }
-                }.start();
             }
         }
     }

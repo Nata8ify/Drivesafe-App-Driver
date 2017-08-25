@@ -19,9 +19,9 @@ public class LocationUtils {
 
     private LocationManager accLocationManager;
     private LocationListener accLocationListener;
-    private double lat;
-    private double lng;
-    private float speed;
+    public static double lat;
+    public static double lng;
+    public static  float speed;
     private String mapUri;
 
     private static LocationUtils locationUtils;
