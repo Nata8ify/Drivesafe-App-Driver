@@ -29,6 +29,7 @@ dependencies {
     })
 
     compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:design:22.2.1'
     compile 'com.jakewharton:butterknife:8.5.1'
     compile 'com.koushikdutta.ion:ion:2.+'
     compile 'com.google.code.gson:gson:2.2.4'
