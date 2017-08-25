@@ -45,46 +45,19 @@ public class ActivateFragment extends Fragment {
 
 
         final int activateServiceState;
-/*
-        protected void onResume(){
-            super.onResume();
-            txtGs.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(LocationUtils.getInstance(getContext()).getMapUri())));
-                }
-            });
-
-            btnActiveDrivesafeService.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (1 - activateServiceState == 1) {
-                        activateServiceState = 1;
-                        startService(new Intent(getContext(), CrashDetectionService.class));
-                        btnActiveDrivesafeService.setText(R.string.main_drvpauseserv);
-                    } else {
-                        btnActiveDrivesafeService.setText(R.string.main_drvactiveserv);
-                        activateServiceState = 0;
-                        stopService(new Intent(getContext(), CrashDetectionService.class));
-                    }
-                }
-
-
-            });
-        }
-*/
-
         final int[] activateState = new int[1];
         btnActiveDrivesafe.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-
+                Intent service =  new Intent(getContext(), CrashDetectionService.class);
                 activateState[0] = 1 - activateState[0];
                 if (activateState[0] == 1) {
                     btnActiveDrivesafe.setText(getResources().getString(R.string.main_drvdeactive));
-                    crashingSensorEngines.start();
+//                    crashingSensorEngines.start();
+                    getActivity().startService(service);
                 } else {
                     btnActiveDrivesafe.setText(getResources().getString(R.string.main_drvactive));
-                    crashingSensorEngines.stop();
+                    getActivity().stopService(service);
+//                    crashingSensorEngines.stop();
                     txtGs.setText(" G's : CRASHING SENSOR STOP");
                 }
             }

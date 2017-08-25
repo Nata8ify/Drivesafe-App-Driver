@@ -166,22 +166,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /*private int activateState;
-
-    @OnClick(R.id.btn_activeDrivesafe)
-    public void onClick() {
-        activateState = 1 - activateState;
-        if (activateState == 1) {
-            btnActiveDrivesafe.setText(getResources().getString(R.string.main_drvdeactive));
-            crashingSensorEngines.start();
-        } else {
-            btnActiveDrivesafe.setText(getResources().getString(R.string.main_drvactive));
-            crashingSensorEngines.stop();
-            txtGs.setText(" G's : CRASHING SENSOR STOP");
-        }
-    }*/
-
-
     public void validatePermission() {
         // Performs Permission Checking.
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, GRANT_FINE_LOCATION);
@@ -219,56 +203,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-    @BindView(R.id.btn_userfalse)
-    Button btnUserfalse;
-    @BindView(R.id.btn_crash_opt)
-    Button btnCrashOpt;
-    @BindView(R.id.btn_fire_opt)
-    Button btnFireOpt;
-    @BindView(R.id.btn_patient_opt)
-    Button btnPatientOpt;
-    @BindView(R.id.btn_animal_opt)
-    Button btnAnimalOpt;
-    @BindView(R.id.btn_other_opt)
-    Button btnOtherOpt;
-    @BindView(R.id.btn_brawl_opt)
-    Button btnBrawlOpt;
-
-    @OnClick({R.id.btn_crash_opt, R.id.btn_fire_opt, R.id.btn_patient_opt,R.id.btn_brawl_opt,R.id.btn_animal_opt, R.id.btn_other_opt})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btn_crash_opt:
-                Accident crashAcc = WWTo.crashRescueRequest(context, LocationUtils.getInstance(context).getLat(), LocationUtils.getInstance(context).getLng());
-                Accident.setInstance(crashAcc);
-                toast(crashAcc.toString());
-                break;
-            case R.id.btn_fire_opt:
-                Accident fireAcc = WWTo.fireRescueRequest(context, LocationUtils.getInstance(context).getLat(), LocationUtils.getInstance(context).getLng());
-                Accident.setInstance(fireAcc);
-                toast(fireAcc.toString());
-                break;
-            case R.id.btn_brawl_opt:
-                Accident brawlAcc = WWTo.brawlRescueRequest(context, LocationUtils.getInstance(context).getLat(), LocationUtils.getInstance(context).getLng());
-                Accident.setInstance(brawlAcc);
-                toast(brawlAcc.toString());
-                break;
-            case R.id.btn_patient_opt:
-                Accident patientAcc = WWTo.patientRescueRequest(context, LocationUtils.getInstance(context).getLat(), LocationUtils.getInstance(context).getLng());
-                Accident.setInstance(patientAcc);
-                toast(patientAcc.toString());
-                break;
-            case R.id.btn_animal_opt:
-                Accident animalAcc = WWTo.animalRescueRequest(context, LocationUtils.getInstance(context).getLat(), LocationUtils.getInstance(context).getLng());
-                Accident.setInstance(animalAcc);
-                toast(animalAcc.toString());
-                break;
-            case R.id.btn_other_opt:
-                Accident otherAcc = WWTo.otherRescueRequest(context, LocationUtils.getInstance(context).getLat(), LocationUtils.getInstance(context).getLng());
-                Accident.setInstance(otherAcc);
-                toast(otherAcc.toString());
-                break;
-        }
-    }
 
 }

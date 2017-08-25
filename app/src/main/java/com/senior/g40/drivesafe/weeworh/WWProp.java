@@ -30,7 +30,6 @@ public class WWProp {
         public static final String ACCCO = "accc"; // Accident Code
         public static final String ACTYP = "acctype"; // Accident Type
         public static final String ACCID = "accid"; // Accident ID
-
     }
 
     /* LOG TAG */

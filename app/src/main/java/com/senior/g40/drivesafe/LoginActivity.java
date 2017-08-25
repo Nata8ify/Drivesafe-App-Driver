@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.senior.g40.drivesafe.engines.UserEngines;
+import com.senior.g40.drivesafe.utils.LocationUtils;
 import com.senior.g40.drivesafe.utils.SettingVerify;
 import com.senior.g40.drivesafe.weeworh.WWProp;
 

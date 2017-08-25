@@ -1,8 +1,10 @@
 package com.senior.g40.drivesafe.engines;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -16,6 +18,7 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.senior.g40.drivesafe.MainActivity;
 import com.senior.g40.drivesafe.R;
 import com.senior.g40.drivesafe.models.Accident;
 import com.senior.g40.drivesafe.utils.LocationUtils;
@@ -102,7 +105,7 @@ public class CrashingSensorEngines implements SensorEventListener {
         }
     }*/
 
-    public  AlertDialog alertDialog;
+    public AlertDialog alertDialog;
     @Override
     public void onSensorChanged(SensorEvent event){
         accX = event.values[0];
@@ -115,7 +118,7 @@ public class CrashingSensorEngines implements SensorEventListener {
             if (gs >= Accident.GS_DEBUG && !reqState) {
                 fixedGs = gs;
                 accMediaPlayer.start();
-                ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(5000l);
+
                 if(alertDialog!=null && alertDialog.isShowing()) return;
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Accident Detected");
@@ -139,26 +142,11 @@ public class CrashingSensorEngines implements SensorEventListener {
                     }
                 });
                 alertDialog = builder.create();
-                alertDialog.show();
-                new CountDownTimer(30000, 1000) {
+               /* try {
+                    alertDialog.show();
+                } catch(Exception exp){
+                }*/
 
-                        @Override
-                        public void onTick(long millisUntilFinished) {
-                            alertDialog.setMessage("You have "+"00:"+ (millisUntilFinished/1000)+"second to respond before the application auto send the accident location to the rescuer team." +
-                                    "If you want to call for help please tap 'Yes' if you don't want any help please tap 'No'");
-                        }
-
-                        @Override
-                        public void onFinish() {
-                            if(alertDialog.isShowing()==true) {
-                                Accident.setInstance(WWTo.crashRescueRequest(context, accLocationUtils.getLat(), accLocationUtils.getLng(), Math.round(fixedGs), accLocationUtils.getSpeed()));
-                                alertDialog.dismiss();
-                                Toast.makeText(context,"Accident Location send",Toast.LENGTH_LONG).show();
-                            }else{
-                                cancel();
-                            }
-                        }
-                }.start();
             }
         }
     }
