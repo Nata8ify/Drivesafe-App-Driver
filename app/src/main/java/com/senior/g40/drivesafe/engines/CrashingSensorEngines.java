@@ -2,13 +2,16 @@ package com.senior.g40.drivesafe.engines;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,12 +54,10 @@ public class CrashingSensorEngines implements SensorEventListener {
 
     public void start() {
         sensorManager.registerListener(this, accSensor, SensorManager.SENSOR_DELAY_UI);
-        accLocationUtils.startLocationUpdate();
     }
 
     public void stop() {
         sensorManager.unregisterListener(this);
-        accLocationUtils.stopLocationUpdate();
     }
 
     public static float accX;
@@ -70,7 +71,7 @@ public class CrashingSensorEngines implements SensorEventListener {
     private boolean reqState;
     public String verbose;
 
-    @Override
+    /*@Override
     public void onSensorChanged(SensorEvent event){
         accX = event.values[0];
         accY = event.values[1];
@@ -80,7 +81,6 @@ public class CrashingSensorEngines implements SensorEventListener {
         if (accLocationUtils.getLng() != 0.0f & accLocationUtils.getLng() != 0.0f) { //<-- Please use something waiting or somethings.
             this.txtOut.setText(" G's : " + String.valueOf(gs) + "\n Lat: " + accLocationUtils.getLat() + "| Lng: " + accLocationUtils.getLng());
             if (gs >= Accident.GS_DEBUG && !reqState) {
-                //TODO
                 fixedGs = gs;
                 accMediaPlayer.start();
                 ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(5000l);
@@ -99,6 +99,67 @@ public class CrashingSensorEngines implements SensorEventListener {
             }
         } else {
             this.txtOut.setText("Service is Starting...");
+        }
+    }*/
+
+    public  AlertDialog alertDialog;
+    @Override
+    public void onSensorChanged(SensorEvent event){
+        accX = event.values[0];
+        accY = event.values[1];
+        accZ = event.values[2];
+        accLinear = Math.sqrt(((accX * accX) + (accY * accY) + (accZ * accZ)));
+        gs = accLinear / 9.8;
+        if (accLocationUtils.getLng() != 0.0f & accLocationUtils.getLng() != 0.0f) { //<-- Please use something waiting or somethings.
+            this.txtOut.setText(" G's : " + String.valueOf(gs) + "\n Lat: " + accLocationUtils.getLat() + "| Lng: " + accLocationUtils.getLng());
+            if (gs >= Accident.GS_DEBUG && !reqState) {
+                fixedGs = gs;
+                accMediaPlayer.start();
+                ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(5000l);
+                if(alertDialog!=null && alertDialog.isShowing()) return;
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Accident Detected");
+                builder.setMessage("You have 00:30 second to respond before the application auto send the accident location to the rescuer team." +
+                        "If you want to call for help please tap 'Yes' if you don't want any help please tap 'No'");
+                builder.setCancelable(true);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        reqState = false;
+                        Accident.setInstance(WWTo.crashRescueRequest(context, accLocationUtils.getLat(), accLocationUtils.getLng(), Math.round(fixedGs), accLocationUtils.getSpeed()));
+                        dialog.dismiss();
+                        Toast.makeText(context,"Accident Location send",Toast.LENGTH_LONG).show();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        falseWatcher();
+                        dialog.cancel();
+                    }
+                });
+                alertDialog = builder.create();
+                alertDialog.show();
+                new CountDownTimer(30000, 1000) {
+
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+                            alertDialog.setMessage("You have "+"00:"+ (millisUntilFinished/1000)+"second to respond before the application auto send the accident location to the rescuer team." +
+                                    "If you want to call for help please tap 'Yes' if you don't want any help please tap 'No'");
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            if(alertDialog.isShowing()==true) {
+                                Accident.setInstance(WWTo.crashRescueRequest(context, accLocationUtils.getLat(), accLocationUtils.getLng(), Math.round(fixedGs), accLocationUtils.getSpeed()));
+                                alertDialog.dismiss();
+                                Toast.makeText(context,"Accident Location send",Toast.LENGTH_LONG).show();
+                            }else{
+                                cancel();
+                            }
+                        }
+                }.start();
+            }
         }
     }
 

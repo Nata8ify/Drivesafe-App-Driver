@@ -38,7 +38,7 @@ import butterknife.OnClick;
 public class MainActivity extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
+    private static LocationUtils accLocationUtils;
     private ViewPager mViewPager;
 
     @BindView(R.id.txt_gs)
@@ -61,12 +61,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
 
         ButterKnife.bind(this);
         this.context = this;
@@ -74,7 +72,14 @@ public class MainActivity extends AppCompatActivity {
         crashingSensorEngines = CrashingSensorEngines.getInstance(this);
         crashingSensorEngines.setTxtviewOut(txtGs);
         startService(new Intent(this, MainActivity.class));
+        accLocationUtils = LocationUtils.getInstance(context);
+        accLocationUtils.startLocationUpdate();
+    }
 
+    @Override
+    protected void onDestroy() {
+        accLocationUtils.stopLocationUpdate();
+        super.onDestroy();
     }
 
     public static class PlaceholderFragment extends Fragment {
@@ -161,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private int activateState;
+    /*private int activateState;
 
     @OnClick(R.id.btn_activeDrivesafe)
     public void onClick() {
@@ -174,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
             crashingSensorEngines.stop();
             txtGs.setText(" G's : CRASHING SENSOR STOP");
         }
-    }
+    }*/
 
 
     public void validatePermission() {
