@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.senior.g40.drivesafe.engines.UserEngines;
+import com.senior.g40.drivesafe.utils.LocationUtils;
 import com.senior.g40.drivesafe.utils.SettingVerify;
 import com.senior.g40.drivesafe.weeworh.WWProp;
 
@@ -40,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        LocationUtils.getInstance(this);
     }
 
     @OnClick({R.id.btn_login, R.id.btn_register})

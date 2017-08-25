@@ -158,7 +158,7 @@ public class Accident {
     }
 
     /* Independence with Web Model. */
-    public static final float GS_SERIOUS = 60 ; // G's that cause the airbag deployed. [60]
+    public static final float GS_SERIOUS = 10; // G's that cause the airbag deployed. [60]
     public static final float GS_DEBUG = 3 ;
 
     public static Accident setInstance(Accident accident) {
