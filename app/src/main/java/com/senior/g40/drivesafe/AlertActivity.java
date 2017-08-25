@@ -21,20 +21,25 @@ import butterknife.OnClick;
 
 public class AlertActivity extends AppCompatActivity {
 
-    @BindView(R.id.txt_alert_msg)
-    TextView txtAlertMessage;
+    @BindView(R.id.txt_alert_msg_line1)
+    TextView txtAlertMessageLine1;
     @BindView(R.id.btn_rescue_request)
     Button btnRescueRequest;
     @BindView(R.id.btn_rescue_dismiss)
     Button btnRescueDismiss;
+    @BindView(R.id.txt_alert_msg_line2_timer)
+    TextView txtAlertMsgLine2Timer;
+
+    public static boolean isAlertActivityPrompted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alert);
         ButterKnife.bind(this);
-        txtAlertMessage.setText(Accident.getInstance().toString());
-        ((Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(5000l);
+        isAlertActivityPrompted = true;
+        txtAlertMessageLine1.setText(Accident.getInstance().toString());
+        ((Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20000l);
     }
 
     CountDownTimer counter;
@@ -46,14 +51,15 @@ public class AlertActivity extends AppCompatActivity {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                txtAlertMessage.setText("You have " + "00:" + (millisUntilFinished / 1000) + " second to respond before the application auto send the accident location to the rescuer team." +
-                        "If you want to call for help please tap 'Yes' if you don't want any help please tap 'No'");
+                txtAlertMessageLine1.setText("You have " + "00:" + (millisUntilFinished / 1000) + " second to respond before the application auto send the accident location to the rescuer team." +
+                        "If you want to call for help please tap 'SEND A RESCUE REQUEST' if you don't want any help please tap 'NO, THIS IS NOT ACCIDENT'");
+                txtAlertMsgLine2Timer.setText(String.valueOf(millisUntilFinished / 1000));
             }
 
             @Override
             public void onFinish() {
                 requestRescue();
-                txtAlertMessage.setText(Accident.getInstance().toString());
+                txtAlertMessageLine1.setText(Accident.getInstance().toString());
                 Toast.makeText(AlertActivity.this, "Accident Location send", Toast.LENGTH_LONG).show();
             }
         };
@@ -74,7 +80,7 @@ public class AlertActivity extends AppCompatActivity {
         }
     }
 
-    private void requestRescue(){
+    private void requestRescue() {
         Accident.setInstance(WWTo.crashRescueRequest(AlertActivity.this, LocationUtils.lat, LocationUtils.lng, Math.round(CrashingSensorEngines.gs), LocationUtils.speed));
     }
 }

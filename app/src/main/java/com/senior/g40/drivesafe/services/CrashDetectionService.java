@@ -63,7 +63,7 @@ public class CrashDetectionService extends IntentService {
                             isRequestDialogPrompted = false;
                         }
                     }, 3000);
-                    if(!isRequestDialogPrompted) {
+                    if(!isRequestDialogPrompted && !AlertActivity.isAlertActivityPrompted) {
                         Intent main = new Intent(CrashDetectionService.this, AlertActivity.class);
                         main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(main);
