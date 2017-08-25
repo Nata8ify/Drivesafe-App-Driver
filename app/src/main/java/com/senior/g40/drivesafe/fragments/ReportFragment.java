@@ -5,10 +5,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.senior.g40.drivesafe.R;
 import com.senior.g40.drivesafe.models.Accident;
@@ -30,68 +32,74 @@ public class ReportFragment extends Fragment {
         super.onStart();
 
         Button btnReportCrash = (Button) getView().findViewById(R.id.btn_crash_opt);
-        btnReportCrash.setOnClickListener(new View.OnClickListener() {
+        btnReportCrash.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onLongClick(View view) {
                 Accident crashAcc = WWTo.crashRescueRequest(getContext(), LocationUtils.getInstance(getContext()).getLat(), LocationUtils.getInstance(getContext()).getLng());
                 Accident.setInstance(crashAcc);
                 Toast.makeText(getContext(), crashAcc.toString(), Toast.LENGTH_LONG).show();
+                return false;
             }
 
 
         });
 
         Button btnReportFire = (Button) getView().findViewById(R.id.btn_fire_opt);
-        btnReportFire.setOnClickListener(new View.OnClickListener() {
+        btnReportFire.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onLongClick(View view) {
                 Accident fireAcc = WWTo.fireRescueRequest(getContext(), LocationUtils.getInstance(getContext()).getLat(), LocationUtils.getInstance(getContext()).getLng());
                 Accident.setInstance(fireAcc);
                 Toast.makeText(getContext(), fireAcc.toString(), Toast.LENGTH_LONG).show();
+                return false;
             }
 
         });
 
         Button btnReportBrawl = (Button) getView().findViewById(R.id.btn_brawl_opt);
-        btnReportBrawl.setOnClickListener(new View.OnClickListener() {
+        btnReportBrawl.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onLongClick(View view) {
                 Accident brawlAcc = WWTo.brawlRescueRequest(getContext(), LocationUtils.getInstance(getContext()).getLat(), LocationUtils.getInstance(getContext()).getLng());
                 Accident.setInstance(brawlAcc);
                 Toast.makeText(getContext(), brawlAcc.toString(), Toast.LENGTH_LONG).show();
+                return false;
             }
 
         });
 
         Button btnReportPatient = (Button) getView().findViewById(R.id.btn_patient_opt);
-        btnReportPatient.setOnClickListener(new View.OnClickListener() {
+        btnReportPatient.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onLongClick(View view) {
                 Accident patientAcc = WWTo.patientRescueRequest(getContext(), LocationUtils.getInstance(getContext()).getLat(), LocationUtils.getInstance(getContext()).getLng());
                 Accident.setInstance(patientAcc);
                 Toast.makeText(getContext(), patientAcc.toString(), Toast.LENGTH_LONG).show();
+                return false;
             }
 
         });
 
         Button btnReportAnimal = (Button) getView().findViewById(R.id.btn_animal_opt);
-        btnReportAnimal.setOnClickListener(new View.OnClickListener() {
+        btnReportAnimal.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onLongClick(View view) {
                 Accident animalAcc = WWTo.animalRescueRequest(getContext(), LocationUtils.getInstance(getContext()).getLat(), LocationUtils.getInstance(getContext()).getLng());
                 Accident.setInstance(animalAcc);
                 Toast.makeText(getContext(), animalAcc.toString(), Toast.LENGTH_LONG).show();
+                return false;
             }
 
         });
 
         Button btnReportOther = (Button) getView().findViewById(R.id.btn_other_opt);
-        btnReportOther.setOnClickListener(new View.OnClickListener() {
+        btnReportOther.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onLongClick(View view) {
                 Accident otherAcc = WWTo.otherRescueRequest(getContext(), LocationUtils.getInstance(getContext()).getLat(), LocationUtils.getInstance(getContext()).getLng());
                 Accident.setInstance(otherAcc);
                 Toast.makeText(getContext(), otherAcc.toString(), Toast.LENGTH_LONG).show();
+                return false;
             }
 
         });

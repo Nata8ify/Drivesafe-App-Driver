@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
+        LocationUtils.getInstance(this);
     }
 
     @OnClick({R.id.btn_login, R.id.btn_register})
