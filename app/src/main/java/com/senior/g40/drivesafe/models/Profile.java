@@ -5,12 +5,17 @@
  */
 package com.senior.g40.drivesafe.models;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  *
  * @author PNattawut
  */
-public class Profile {
+public class Profile extends RealmObject{
+    @PrimaryKey
     private long userId;
+
     private String firstName;
     private String lastName;
     private long personalId;
@@ -18,7 +23,7 @@ public class Profile {
     private String address1;
     private String address2;
     private int age;
-    private char gender;
+    private String gender;
 
     private static Profile profile;
     public static Profile getInsatance(){
@@ -99,11 +104,11 @@ public class Profile {
         this.age = age;
     }
 
-    public char getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(char gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -112,6 +117,6 @@ public class Profile {
         return "Profile{" + "userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", personalId=" + personalId + ", phoneNumber=" + phoneNumber + ", address1=" + address1 + ", address2=" + address2 + ", age=" + age + ", gender=" + gender + '}';
     }
 
-    
-    
+
+
 }

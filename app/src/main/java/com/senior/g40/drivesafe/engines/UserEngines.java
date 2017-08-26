@@ -3,6 +3,7 @@ package com.senior.g40.drivesafe.engines;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.koushikdutta.ion.Ion;
 import com.senior.g40.drivesafe.models.Profile;
 import com.senior.g40.drivesafe.weeworh.WWProp;
@@ -26,16 +27,14 @@ public class UserEngines {
     }
 
     public boolean login(String username, String password) {
-        String callback = null;
+        Profile profile = null;
         try {
-            callback = Ion.with(appContext)
+            profile = Ion.with(appContext)
                     .load(WWProp.URI.LOGIN)
                     .setBodyParameter(WWProp.PARAM.USRN, username)
                     .setBodyParameter(WWProp.PARAM.PSWD, password)
-                    .asString()
+                    .as(Profile.class)
                     .get();
-            Gson gson = new Gson();
-            Profile profile = gson.fromJson(callback, Profile.class);
             if (profile != null) {
                 Profile.createInsatance(profile);
                 return true;

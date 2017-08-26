@@ -70,6 +70,12 @@
                 android:text="user003" />
         </android.support.design.widget.TextInputLayout>
 
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login_remember"
+            android:id="@+id/chkbox_remember"/>
+
         <Button
             android:id="@+id/btn_login"
             style="@style/btn_login"

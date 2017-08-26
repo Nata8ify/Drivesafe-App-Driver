@@ -20,6 +20,7 @@ import com.senior.g40.drivesafe.AlertActivity;
 import com.senior.g40.drivesafe.MainActivity;
 import com.senior.g40.drivesafe.R;
 import com.senior.g40.drivesafe.engines.CrashingSensorEngines;
+import com.senior.g40.drivesafe.fragments.ActivateFragment;
 import com.senior.g40.drivesafe.models.Accident;
 
 /**
@@ -81,7 +82,7 @@ public class CrashDetectionService extends IntentService {
 
     private Runnable sensorRunnable;
     private Handler sensorHandler;
-    private boolean isSensorActived;
+    public static boolean isSensorActived;
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -95,6 +96,7 @@ public class CrashDetectionService extends IntentService {
                     .setContentText("Tap this Notification to Stop...").build();
             startForeground(1, notification);
             sensorHandler.post(sensorRunnable);
+            isSensorActived = true;
         }return START_STICKY;
     }
 
@@ -105,6 +107,7 @@ public class CrashDetectionService extends IntentService {
         CrashingSensorEngines.getInstance(CrashDetectionService.this).stop();
         sensorHandler.removeCallbacks(sensorRunnable);
         isSensorActived = false;
+        ActivateFragment.activateState[0] = 1;
         Log.v("onDestroy: ", true + "");
     }
 

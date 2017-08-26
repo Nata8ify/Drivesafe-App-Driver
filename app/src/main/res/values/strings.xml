@@ -5,13 +5,14 @@
     <string name="login_username">Username</string>
     <string name="login_password">Password</string>
     <string name="login_register">Register</string>
+    <string name="login_remember">Remember</string>
     <string name="login_login">Login</string>
     <string name="login_nouser">Invalid User Data, Please Check your \'Username\' or \'Password\' is valid.</string>
 
     <!--Main-->
-    <string name="main_drvactive">Activate Drivesafe</string>
+    <string name="main_drvactive">Activate</string>
     <string name="main_drvactiveserv">Activate Drivesafe As Service</string>
-    <string name="main_drvdeactive">Deactivate Drivesafe</string>
+    <string name="main_drvdeactive">Deactivate</string>
     <string name="main_drvpauseserv">Pause Drivesafe Service</string>
     <string name="main_userfalse">This is False Accident</string>
     <string-array name="main_calloption">

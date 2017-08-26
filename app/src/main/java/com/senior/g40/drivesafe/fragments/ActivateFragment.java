@@ -32,6 +32,7 @@ public class ActivateFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_activate, container, false);
     }
 
+    public static int[] activateState = new int[1];
     @Override
     public void onStart() {
         super.onStart();
@@ -44,8 +45,7 @@ public class ActivateFragment extends Fragment {
         crashingSensorEngines.setTxtviewOut(txtGs);
 
 
-        final int activateServiceState;
-        final int[] activateState = new int[1];
+
         btnActiveDrivesafe.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent service =  new Intent(getContext(), CrashDetectionService.class);

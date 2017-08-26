@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -50,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.activity_main)
     LinearLayout activityMain;
 
+    private Handler mainHandler;
+    private Runnable connectivityRunnable;
+
 
     private CrashingSensorEngines crashingSensorEngines;
 
@@ -62,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
@@ -71,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
         validatePermission();
         crashingSensorEngines = CrashingSensorEngines.getInstance(this);
         crashingSensorEngines.setTxtviewOut(txtGs);
-        startService(new Intent(this, MainActivity.class));
         accLocationUtils = LocationUtils.getInstance(context);
         accLocationUtils.startLocationUpdate();
     }
@@ -137,33 +139,6 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
-    }
-
-    private int activateServiceState;
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        txtGs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(LocationUtils.getInstance(MainActivity.this).getMapUri())));
-            }
-        });
-        btnActiveDrivesafeService.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (1 - activateServiceState == 1) {
-                    activateServiceState = 1;
-                    startService(new Intent(MainActivity.this, CrashDetectionService.class));
-                    btnActiveDrivesafeService.setText(R.string.main_drvpauseserv);
-                } else {
-                    btnActiveDrivesafeService.setText(R.string.main_drvactiveserv);
-                    activateServiceState = 0;
-                    stopService(new Intent(MainActivity.this, CrashDetectionService.class));
-                }
-            }
-        });
     }
 
     public void validatePermission() {
