@@ -90,7 +90,7 @@ public class CrashDetectionService extends IntentService {
             registerReceiver(serviceBroadcastReceiver, new IntentFilter("stopSelf"));
             PendingIntent pdIntent = PendingIntent.getBroadcast(this, 0, new Intent("stopSelf"), PendingIntent.FLAG_CANCEL_CURRENT);
             Notification notification = new Notification.Builder(this)
-                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSmallIcon(R.mipmap.icon)
                     .setContentIntent(pdIntent)
                     .setContentTitle("Service Running")
                     .setContentText("Tap to Stop...").build();
