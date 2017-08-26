@@ -31,7 +31,7 @@ public class AlertActivity extends AppCompatActivity {
     TextView txtAlertMsgLine2Timer;
 
     public static boolean isAlertActivityPrompted;
-
+    private Vibrator vibrator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +39,8 @@ public class AlertActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         isAlertActivityPrompted = true;
         txtAlertMessageLine1.setText(Accident.getInstance().toString());
-        ((Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(20000l);
+        vibrator = ((Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE));
+        vibrator.vibrate(20000l);
     }
 
     CountDownTimer counter;
@@ -51,7 +52,7 @@ public class AlertActivity extends AppCompatActivity {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                txtAlertMessageLine1.setText("You have " + "00:" + (millisUntilFinished / 1000) + " second to respond before the application auto send the accident location to the rescuer team." +
+                txtAlertMessageLine1.setText("You have " + (millisUntilFinished / 1000) + " second to respond before the application auto send the accident location to the rescuer team." +
                         "If you want to call for help please tap 'SEND A RESCUE REQUEST' if you don't want any help please tap 'NO, THIS IS NOT ACCIDENT'");
                 txtAlertMsgLine2Timer.setText(String.valueOf(millisUntilFinished / 1000));
             }
@@ -60,7 +61,7 @@ public class AlertActivity extends AppCompatActivity {
             public void onFinish() {
                 requestRescue();
                 txtAlertMessageLine1.setText(Accident.getInstance().toString());
-                Toast.makeText(AlertActivity.this, "Accident Location send", Toast.LENGTH_LONG).show();
+                Toast.makeText(AlertActivity.this, "Rescue Request is Sent", Toast.LENGTH_LONG).show();
             }
         };
         counter.start();
@@ -75,6 +76,7 @@ public class AlertActivity extends AppCompatActivity {
                 break;
             case R.id.btn_rescue_dismiss:
                 counter.cancel();
+                vibrator.cancel();
                 this.finish();
                 break;
         }

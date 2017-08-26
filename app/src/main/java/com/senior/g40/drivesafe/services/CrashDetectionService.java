@@ -53,7 +53,6 @@ public class CrashDetectionService extends IntentService {
             @Override
             public void run() {
                 CrashingSensorEngines.getInstance(CrashDetectionService.this).start();
-                Log.d("G's", CrashingSensorEngines.gs+"");
                 sensorHandler.post(this);
                 isSensorActived = true;
                 if(CrashingSensorEngines.gs >= Accident.GS_DEBUG){
@@ -63,7 +62,7 @@ public class CrashDetectionService extends IntentService {
                             isRequestDialogPrompted = false;
                         }
                     }, 3000);
-                    if(!isRequestDialogPrompted && !AlertActivity.isAlertActivityPrompted) {
+                    if(!isRequestDialogPrompted && !AlertActivity.isAlertActivityPrompted || true) {
                         Intent main = new Intent(CrashDetectionService.this, AlertActivity.class);
                         main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(main);
@@ -92,8 +91,8 @@ public class CrashDetectionService extends IntentService {
             Notification notification = new Notification.Builder(this)
                     .setSmallIcon(R.mipmap.icon)
                     .setContentIntent(pdIntent)
-                    .setContentTitle("Service Running")
-                    .setContentText("Tap to Stop...").build();
+                    .setContentTitle("Crash Detection Service is Running")
+                    .setContentText("Tap this Notification to Stop...").build();
             startForeground(1, notification);
             sensorHandler.post(sensorRunnable);
         }return START_STICKY;
