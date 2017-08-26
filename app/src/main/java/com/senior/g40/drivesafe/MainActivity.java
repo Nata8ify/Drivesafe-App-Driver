@@ -2,6 +2,7 @@ package com.senior.g40.drivesafe;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -60,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
     /*Activity Attributes*/
     private Context context;
 
+
+    private  AlertDialog connectivityDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +81,38 @@ public class MainActivity extends AppCompatActivity {
         crashingSensorEngines.setTxtviewOut(txtGs);
         accLocationUtils = LocationUtils.getInstance(context);
         accLocationUtils.startLocationUpdate();
+
+        connectivityDialog = new AlertDialog.Builder(MainActivity.this)
+                .setMessage(getResources().getString(R.string.warn_no_network_and_please))
+                .setPositiveButton(getResources().getString(R.string.goto_setting), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.setClassName("com.android.phone", "com.android.phone.NetworkSetting");
+                        startActivity(intent);
+                    }
+                })
+                .setCancelable(false)
+                .create();
+
+        mainHandler = new Handler();
+        connectivityRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if(!SettingVerify.isNetworkConnected(MainActivity.this)){
+                    connectivityDialog.show();
+                } else {
+                    connectivityDialog.dismiss();
+                }
+                mainHandler.postDelayed(this, 1000);
+            }
+        };
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mainHandler.post(connectivityRunnable);
     }
 
     @Override
@@ -177,6 +214,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
 
 }

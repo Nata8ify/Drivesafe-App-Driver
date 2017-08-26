@@ -38,8 +38,10 @@
     <string name="acknowledge">Acknowledge</string>
     <string name="on">ON</string>
     <string name="off">OFF</string>
+    <string name="goto_setting">Go to Setting</string>
 
     <!--Warning-->
     <string name="warn_no_network">A Network Connectivity isn\'t Available</string>
+    <string name="warn_no_network_and_please">A Network Connectivity isn\'t Available, Please Enable WIFI or 3G/4G to Continue.</string>
 
 </resources>
