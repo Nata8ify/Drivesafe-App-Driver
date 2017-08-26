@@ -29,6 +29,14 @@
     <string name="main_report_other_opt">Other</string>
     <string name="main_report_brawl_opt">Brawl</string>
 
+    <!--Alert-->
+    <string name="crashsrvc_send_request">Send a Rescue Request</string>
+    <string name="crashsrvc_not_accident">No, This is Not Accident</string>
+    <string name="crashsrvc_cancel_request">Success, The Rescue Request is now Cancelled</string>
+
+    <!--Crash Detection Service-->
+    <string name="crashsrvc_request_sent">Rescue Request is Sent</string>
+
     <!--Simple-->
     <string name="ok">OKAY</string>
     <string name="submit">Submit</string>

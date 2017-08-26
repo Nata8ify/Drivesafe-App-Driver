@@ -111,9 +111,9 @@ public class ReportFragment extends Fragment {
                 if (SettingVerify.isNetworkConnected(getContext())) {
                     Log.v(">>>>", Accident.getInstance().toString());
                     if (WWTo.setUserFalseAccident(getContext(), Accident.getInstance())) {
-                        Toast.makeText(getContext(), "Success", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), getResources().getString(R.string.crashsrvc_cancel_request), Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(getContext(), " : ( ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Unsuccessful ", Toast.LENGTH_LONG).show();
                     }
                 }
 
