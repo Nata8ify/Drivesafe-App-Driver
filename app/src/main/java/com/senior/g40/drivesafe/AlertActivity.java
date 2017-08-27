@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.senior.g40.drivesafe.engines.CrashingSensorEngines;
 import com.senior.g40.drivesafe.models.Accident;
-import com.senior.g40.drivesafe.models.Profile;
 import com.senior.g40.drivesafe.models.extras.AccidentBrief;
 import com.senior.g40.drivesafe.utils.LocationUtils;
 import com.senior.g40.drivesafe.weeworh.WWTo;
@@ -44,6 +43,8 @@ public class AlertActivity extends AppCompatActivity {
     LinearLayout linroutRequestCancel;
     @BindView(R.id.img_ww_ico)
     ImageView imgWwIco;
+    @BindView(R.id.linrout_request_sent_message)
+    LinearLayout linroutRequestSentMessage;
     private Vibrator vibrator;
 
     private Realm realm;
@@ -93,11 +94,7 @@ public class AlertActivity extends AppCompatActivity {
             case R.id.btn_rescue_request:
                 counter.cancel();
                 counter.onFinish();
-                linroutRequestActions.setVisibility(View.GONE);
-                linroutRequestCancel.setVisibility(View.VISIBLE);
-                txtAlertMsgLine2Timer.setVisibility(View.GONE);
-                imgWwIco.setVisibility(View.VISIBLE);
-
+                this.finish();
                 break;
             case R.id.btn_rescue_dismiss:
                 counter.cancel();
@@ -112,13 +109,16 @@ public class AlertActivity extends AppCompatActivity {
 
     private void requestRescue() {
         Accident.setInstance(WWTo.crashRescueRequest(AlertActivity.this, LocationUtils.lat, LocationUtils.lng, Math.round(CrashingSensorEngines.gs), LocationUtils.speed));
-        if(!realm.isInTransaction()){realm.beginTransaction();}
+        if (!realm.isInTransaction()) {
+            realm.beginTransaction();
+        }
         realm.insert(new AccidentBrief(Accident.getInstance()));
         realm.commitTransaction();
     }
 
     private AccidentBrief latestAccidentBrief;
-    private void dismissLatestRescueRequest(){ //Or Set 'False'
+
+    private void dismissLatestRescueRequest() { //Or Set 'False'
         realm.beginTransaction();
         latestAccidentBrief = realm.where(AccidentBrief.class).findFirst();
         if (WWTo.setUserFalseAccidentId(this, latestAccidentBrief.getAccidentId())) {

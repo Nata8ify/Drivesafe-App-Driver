@@ -118,21 +118,16 @@ public class MainActivity extends AppCompatActivity {
                 .setView(R.layout.view_dismiss_alert)
                 .setCancelable(false)
                 .create();
-        /*Button setFalseAndCancelButton = ((Button)currentRescReqDialog.findViewById(R.id.btn_set_false_as_dismiss));
-        setFalseAndCancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });*/
         currentRescReqRunnable = new Runnable() {
             @Override
             public void run() {
                 if (realm.where(AccidentBrief.class).findFirst() != null) {
                     currentRescReqDialog.show();
                 } else {
-                    mainHandler.postDelayed(this, 1000);
+
                 }
+                    mainHandler.postDelayed(this, 1000);
+
             }
         };
     }
