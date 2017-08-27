@@ -122,11 +122,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (realm.where(AccidentBrief.class).findFirst() != null) {
+                    if(!isFinishing())
                     currentRescReqDialog.show();
-                } else {
-
                 }
-                    mainHandler.postDelayed(this, 1000);
+                mainHandler.postDelayed(this, 1000);
 
             }
         };

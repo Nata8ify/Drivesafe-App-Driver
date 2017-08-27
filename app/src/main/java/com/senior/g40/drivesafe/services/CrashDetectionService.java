@@ -22,6 +22,9 @@ import com.senior.g40.drivesafe.R;
 import com.senior.g40.drivesafe.engines.CrashingSensorEngines;
 import com.senior.g40.drivesafe.fragments.ActivateFragment;
 import com.senior.g40.drivesafe.models.Accident;
+import com.senior.g40.drivesafe.models.extras.AccidentBrief;
+
+import io.realm.Realm;
 
 /**
  * Created by PNattawut on 22-Apr-17.
@@ -45,10 +48,14 @@ public class CrashDetectionService extends IntentService {
         }
     };
 
+    private Realm realm;
+
     private boolean isRequestDialogPrompted;
     @Override
     public void onCreate() {
         super.onCreate();
+        Realm.init(this);
+        realm = Realm.getDefaultInstance();
         sensorHandler = new Handler();
         sensorRunnable = new Runnable() {
             @Override
@@ -64,10 +71,12 @@ public class CrashDetectionService extends IntentService {
                         }
                     }, 3000);
                     if(!isRequestDialogPrompted ) {
-                        Intent main = new Intent(CrashDetectionService.this, AlertActivity.class);
-                        main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(main);
-                        isRequestDialogPrompted = true;
+                        if(realm.where(AccidentBrief.class).findFirst() == null) {
+                            Intent main = new Intent(CrashDetectionService.this, AlertActivity.class);
+                            main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(main);
+                            isRequestDialogPrompted = true;
+                        }
                     }
                 }
             }
