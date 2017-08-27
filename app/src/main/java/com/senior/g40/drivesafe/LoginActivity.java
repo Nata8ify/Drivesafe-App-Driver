@@ -1,5 +1,6 @@
 package com.senior.g40.drivesafe;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -50,11 +51,22 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         LocationUtils.getInstance(this);
+
+    }
+
+    ProgressDialog progressDialog;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getResources().getString(R.string.loading));
+        progressDialog.setCancelable(false);
+
         Realm.init(this);
         realm = Realm.getDefaultInstance();
         isRememberSet();
     }
-
 
     @OnClick({R.id.btn_login, R.id.btn_register})
     public void onClick(View view) {
@@ -95,16 +107,18 @@ public class LoginActivity extends AppCompatActivity {
         return;
     }
 
-
     private void isRememberSet() {
+        progressDialog.show();
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
                 if(realm.where(Profile.class).findFirst() != null){
                     Profile.createInsatance(realm.where(Profile.class).findFirst());
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    LoginActivity.this.finish();
                 }
             }
         });
+        progressDialog.cancel();
     }
 }

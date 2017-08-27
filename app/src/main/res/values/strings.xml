@@ -32,7 +32,11 @@
     <!--Alert-->
     <string name="crashsrvc_send_request">Send a Rescue Request</string>
     <string name="crashsrvc_not_accident">No, This is Not Accident</string>
-    <string name="crashsrvc_cancel_request">Success, The Rescue Request is now Cancelled</string>
+    <string name="crashsrvc_cancel_request">Cancel the Rescue Request</string>
+    <string name="crashsrvc_cancel_request_success">Success, The Rescue Request is now Cancelled</string>
+    <string name="crashsrvc_request_ontheway">Request is on the way</string>
+    <string name="crashsrvc_wanna_cancel">If you want to cancel the rescue request,\n Please press on the cancellation button for 10 times to cancel the rescue request.</string>
+    <string name="crashsrvc_you_may_beasked"><u>NOTICE</u> : This is a sensitive action, You may be asked for the cancellation reason by the officer or rescuer</string>
 
     <!--Crash Detection Service-->
     <string name="crashsrvc_request_sent">Rescue Request is Sent</string>
@@ -46,6 +50,8 @@
     <string name="acknowledge">Acknowledge</string>
     <string name="on">ON</string>
     <string name="off">OFF</string>
+    <string name="inprogress">In Progress</string>
+    <string name="loading">Loading...</string>
     <string name="goto_setting">Go to Setting</string>
 
     <!--Warning-->

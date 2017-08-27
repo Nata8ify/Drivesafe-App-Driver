@@ -29,6 +29,7 @@ import com.senior.g40.drivesafe.engines.CrashingSensorEngines;
 import com.senior.g40.drivesafe.fragments.ActivateFragment;
 import com.senior.g40.drivesafe.fragments.ReportFragment;
 import com.senior.g40.drivesafe.models.Accident;
+import com.senior.g40.drivesafe.models.extras.AccidentBrief;
 import com.senior.g40.drivesafe.services.CrashDetectionService;
 import com.senior.g40.drivesafe.utils.LocationUtils;
 import com.senior.g40.drivesafe.utils.SettingVerify;
@@ -37,6 +38,7 @@ import com.senior.g40.drivesafe.weeworh.WWTo;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,15 +57,17 @@ public class MainActivity extends AppCompatActivity {
 
     private Handler mainHandler;
     private Runnable connectivityRunnable;
-
+    private Runnable currentRescReqRunnable;
 
     private CrashingSensorEngines crashingSensorEngines;
 
     /*Activity Attributes*/
     private Context context;
 
+    private Realm realm;
 
-    private  AlertDialog connectivityDialog;
+    private AlertDialog connectivityDialog;
+    private AlertDialog currentRescReqDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         ButterKnife.bind(this);
+        Realm.init(this);
+        realm = Realm.getDefaultInstance();
         this.context = this;
         validatePermission();
         crashingSensorEngines = CrashingSensorEngines.getInstance(this);
@@ -82,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
         accLocationUtils = LocationUtils.getInstance(context);
         accLocationUtils.startLocationUpdate();
 
+
+        mainHandler = new Handler();
         connectivityDialog = new AlertDialog.Builder(MainActivity.this)
                 .setMessage(getResources().getString(R.string.warn_no_network_and_please))
                 .setPositiveButton(getResources().getString(R.string.goto_setting), new DialogInterface.OnClickListener() {
@@ -94,17 +102,37 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .setCancelable(false)
                 .create();
-
-        mainHandler = new Handler();
         connectivityRunnable = new Runnable() {
             @Override
             public void run() {
-                if(!SettingVerify.isNetworkConnected(MainActivity.this)){
+                if (!SettingVerify.isNetworkConnected(MainActivity.this)) {
                     connectivityDialog.show();
                 } else {
                     connectivityDialog.dismiss();
                 }
                 mainHandler.postDelayed(this, 1000);
+            }
+        };
+
+        currentRescReqDialog = new AlertDialog.Builder(this)
+                .setView(R.layout.view_dismiss_alert)
+                .setCancelable(false)
+                .create();
+        /*Button setFalseAndCancelButton = ((Button)currentRescReqDialog.findViewById(R.id.btn_set_false_as_dismiss));
+        setFalseAndCancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });*/
+        currentRescReqRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if (realm.where(AccidentBrief.class).findFirst() != null) {
+                    currentRescReqDialog.show();
+                } else {
+                    mainHandler.postDelayed(this, 1000);
+                }
             }
         };
     }
@@ -113,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mainHandler.post(connectivityRunnable);
+        mainHandler.post(currentRescReqRunnable);
     }
 
     @Override
@@ -154,9 +183,11 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            switch (position){
-                case 0 : return new ReportFragment();
-                case 1 : return new ActivateFragment();
+            switch (position) {
+                case 0:
+                    return new ReportFragment();
+                case 1:
+                    return new ActivateFragment();
             }
             return null;
         }
@@ -207,12 +238,42 @@ public class MainActivity extends AppCompatActivity {
     public void onViewClicked() {
         if (SettingVerify.isNetworkConnected(this)) {
             Log.v(">>>>", Accident.getInstance().toString());
-            if(WWTo.setUserFalseAccident(this, Accident.getInstance())){
+            if (WWTo.setUserFalseAccident(this, Accident.getInstance())) {
                 toast("Success!");
             } else {
                 toast(":(");
             }
         }
+    }
+
+    protected final int CANCEL_TAP_TIMES = 10;
+    protected int currentCancelTapTimes = 0;
+
+    public void setFalseOrCancel(View view) {
+        if (currentCancelTapTimes < CANCEL_TAP_TIMES) {
+            ((Button) view).setText(getResources().getString(R.string.crashsrvc_cancel_request).concat(" (").concat(String.valueOf(CANCEL_TAP_TIMES - currentCancelTapTimes)).concat(")"));
+            ++currentCancelTapTimes;
+        } else {
+            dismissLatestRescueRequest();
+            currentCancelTapTimes = 0;
+            currentRescReqDialog.cancel();
+
+        }
+    }
+
+    private AccidentBrief latestAccidentBrief;
+    private void dismissLatestRescueRequest(){ //Or Set 'False'
+        if(!realm.isInTransaction()){realm.beginTransaction();}
+        latestAccidentBrief = realm.where(AccidentBrief.class).findFirst();
+        if(latestAccidentBrief == null) {
+            Toast.makeText(this, "Unsuccessful, You have no Incident which is Reported.", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (WWTo.setUserFalseAccidentId(this, latestAccidentBrief.getAccidentId())) {
+            Toast.makeText(this, getResources().getString(R.string.crashsrvc_cancel_request), Toast.LENGTH_LONG).show();
+            realm.delete(AccidentBrief.class);
+        }
+        realm.commitTransaction();
     }
 
 }

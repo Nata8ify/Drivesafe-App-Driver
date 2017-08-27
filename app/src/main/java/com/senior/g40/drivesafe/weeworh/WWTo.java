@@ -272,4 +272,22 @@ public class WWTo {
         }
         return false;
     }
+
+    public static boolean setUserFalseAccidentId(Context context, long accidentId) {
+        String response = null;
+        try {
+            response = Ion.with(context)
+                    .load(WWProp.URI.USR_FALSE_CRASH)
+                    .setBodyParameter(WWProp.PARAM.ACCID, String.valueOf(accidentId))
+                    .asString()
+                    .get().trim();
+            Log.v("boolean res", response);
+            return Boolean.parseBoolean(response);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

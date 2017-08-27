@@ -8,15 +8,26 @@
     android:padding="16dp"
     tools:context="com.senior.g40.drivesafe.AlertActivity">
 
-
-    <TextView
-        android:id="@+id/txt_alert_msg_line2_timer"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="48"
-        android:textSize="72dp" />
+        android:layout_height="wrap_content" android:orientation="horizontal">
 
+        <TextView
+            android:id="@+id/txt_alert_msg_line2_timer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="48"
+            android:textSize="72dp" />
+
+        <ImageView
+            android:id="@+id/img_ww_ico"
+            android:layout_width="200dp"
+            android:visibility="gone"
+            android:gravity="center"
+            android:src="@drawable/ww_icon_big"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/txt_alert_msg_line1"
@@ -26,10 +37,10 @@
 
 
     <LinearLayout
+        android:id="@+id/linrout_request_actions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:id="@+id/linrout_request_actions"
         android:orientation="horizontal">
 
         <Button
@@ -48,19 +59,20 @@
             android:padding="20dp"
             android:text="@string/crashsrvc_not_accident" />
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/linrout_request_cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:visibility="gone"
-        android:id="@+id/linrout_request_cancel"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <Button
             android:id="@+id/btn_set_false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
-            android:text="@string/crashsrvc_send_request" />
+            android:text="@string/crashsrvc_not_accident" />
     </LinearLayout>
 </LinearLayout>

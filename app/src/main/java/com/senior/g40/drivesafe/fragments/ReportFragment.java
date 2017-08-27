@@ -12,17 +12,27 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.senior.g40.drivesafe.AlertActivity;
 import com.senior.g40.drivesafe.R;
+import com.senior.g40.drivesafe.engines.CrashingSensorEngines;
 import com.senior.g40.drivesafe.models.Accident;
+import com.senior.g40.drivesafe.models.extras.AccidentBrief;
 import com.senior.g40.drivesafe.utils.LocationUtils;
 import com.senior.g40.drivesafe.utils.SettingVerify;
 import com.senior.g40.drivesafe.weeworh.WWTo;
 
+import io.realm.Realm;
+
 
 public class ReportFragment extends Fragment {
+
+    private Realm realm;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Realm.init(getContext());
+        realm = Realm.getDefaultInstance();
         return inflater.inflate(R.layout.fragment_report, container, false);
 
     }
@@ -37,7 +47,7 @@ public class ReportFragment extends Fragment {
             public boolean onLongClick(View view) {
                 Accident crashAcc = WWTo.crashRescueRequest(getContext(), LocationUtils.getInstance(getContext()).getLat(), LocationUtils.getInstance(getContext()).getLng());
                 Accident.setInstance(crashAcc);
-                Toast.makeText(getContext(), crashAcc.toString(), Toast.LENGTH_LONG).show();
+                save();
                 return false;
             }
 
@@ -50,7 +60,7 @@ public class ReportFragment extends Fragment {
             public boolean onLongClick(View view) {
                 Accident fireAcc = WWTo.fireRescueRequest(getContext(), LocationUtils.getInstance(getContext()).getLat(), LocationUtils.getInstance(getContext()).getLng());
                 Accident.setInstance(fireAcc);
-                Toast.makeText(getContext(), fireAcc.toString(), Toast.LENGTH_LONG).show();
+                save();
                 return false;
             }
 
@@ -62,7 +72,7 @@ public class ReportFragment extends Fragment {
             public boolean onLongClick(View view) {
                 Accident brawlAcc = WWTo.brawlRescueRequest(getContext(), LocationUtils.getInstance(getContext()).getLat(), LocationUtils.getInstance(getContext()).getLng());
                 Accident.setInstance(brawlAcc);
-                Toast.makeText(getContext(), brawlAcc.toString(), Toast.LENGTH_LONG).show();
+                save();
                 return false;
             }
 
@@ -74,7 +84,7 @@ public class ReportFragment extends Fragment {
             public boolean onLongClick(View view) {
                 Accident patientAcc = WWTo.patientRescueRequest(getContext(), LocationUtils.getInstance(getContext()).getLat(), LocationUtils.getInstance(getContext()).getLng());
                 Accident.setInstance(patientAcc);
-                Toast.makeText(getContext(), patientAcc.toString(), Toast.LENGTH_LONG).show();
+                save();
                 return false;
             }
 
@@ -86,7 +96,7 @@ public class ReportFragment extends Fragment {
             public boolean onLongClick(View view) {
                 Accident animalAcc = WWTo.animalRescueRequest(getContext(), LocationUtils.getInstance(getContext()).getLat(), LocationUtils.getInstance(getContext()).getLng());
                 Accident.setInstance(animalAcc);
-                Toast.makeText(getContext(), animalAcc.toString(), Toast.LENGTH_LONG).show();
+                save();
                 return false;
             }
 
@@ -98,7 +108,7 @@ public class ReportFragment extends Fragment {
             public boolean onLongClick(View view) {
                 Accident otherAcc = WWTo.otherRescueRequest(getContext(), LocationUtils.getInstance(getContext()).getLat(), LocationUtils.getInstance(getContext()).getLng());
                 Accident.setInstance(otherAcc);
-                Toast.makeText(getContext(), otherAcc.toString(), Toast.LENGTH_LONG).show();
+                save();
                 return false;
             }
 
@@ -109,14 +119,8 @@ public class ReportFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (SettingVerify.isNetworkConnected(getContext())) {
-                    Log.v(">>>>", Accident.getInstance().toString());
-                    if (WWTo.setUserFalseAccident(getContext(), Accident.getInstance())) {
-                        Toast.makeText(getContext(), getResources().getString(R.string.crashsrvc_cancel_request), Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getContext(), "Unsuccessful ", Toast.LENGTH_LONG).show();
-                    }
+                    dismissLatestRescueRequest();
                 }
-
 
 
             }
@@ -125,7 +129,28 @@ public class ReportFragment extends Fragment {
 
 
     }
+
+    private void save() {
+        if(!realm.isInTransaction()){realm.beginTransaction();}
+        realm.insert(new AccidentBrief(Accident.getInstance()));
+        realm.commitTransaction();
     }
+
+    private AccidentBrief latestAccidentBrief;
+    private void dismissLatestRescueRequest(){ //Or Set 'False'
+        if(!realm.isInTransaction()){realm.beginTransaction();}
+        latestAccidentBrief = realm.where(AccidentBrief.class).findFirst();
+        if(latestAccidentBrief == null) {
+            Toast.makeText(getContext(), "Unsuccessful, You have no Incident which is Reported.", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (WWTo.setUserFalseAccidentId(getContext(), latestAccidentBrief.getAccidentId())) {
+            Toast.makeText(getContext(), getResources().getString(R.string.crashsrvc_cancel_request), Toast.LENGTH_LONG).show();
+            realm.delete(AccidentBrief.class);
+        }
+        realm.commitTransaction();
+    }
+}
 
 
 
