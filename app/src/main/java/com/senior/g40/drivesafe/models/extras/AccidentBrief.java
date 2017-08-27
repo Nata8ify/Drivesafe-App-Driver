@@ -60,4 +60,14 @@ public class AccidentBrief extends RealmObject{
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+
+    @Override
+    public String toString() {
+        return "AccidentBrief{" +
+                "accidentId=" + accidentId +
+                ", userId=" + userId +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
+    }
 }

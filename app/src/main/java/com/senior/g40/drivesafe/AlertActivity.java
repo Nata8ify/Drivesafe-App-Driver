@@ -121,7 +121,7 @@ public class AlertActivity extends AppCompatActivity {
     private void dismissLatestRescueRequest() { //Or Set 'False'
         realm.beginTransaction();
         latestAccidentBrief = realm.where(AccidentBrief.class).findFirst();
-        if (WWTo.setUserFalseAccidentId(this, latestAccidentBrief.getAccidentId())) {
+        if (WWTo.setUserFalseAccidentId(this, latestAccidentBrief.getAccidentId(), latestAccidentBrief.getUserId())) {
             Toast.makeText(this, getResources().getString(R.string.crashsrvc_cancel_request_success), Toast.LENGTH_LONG).show();
             realm.delete(AccidentBrief.class);
             vibrator.cancel();

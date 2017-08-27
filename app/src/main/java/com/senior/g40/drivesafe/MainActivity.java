@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
     private Context context;
 
     private Realm realm;
+    private AccidentBrief latestAccidentBrief;
 
     private AlertDialog connectivityDialog;
     private AlertDialog currentRescReqDialog;
@@ -81,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Realm.init(this);
         realm = Realm.getDefaultInstance();
+        latestAccidentBrief = realm.where(AccidentBrief.class).findFirst();
+
         this.context = this;
         validatePermission();
         crashingSensorEngines = CrashingSensorEngines.getInstance(this);
@@ -121,12 +124,15 @@ public class MainActivity extends AppCompatActivity {
         currentRescReqRunnable = new Runnable() {
             @Override
             public void run() {
-                if (realm.where(AccidentBrief.class).findFirst() != null) {
-                    if(!isFinishing())
-                    currentRescReqDialog.show();
+                latestAccidentBrief = realm.where(AccidentBrief.class).findFirst();
+                if (latestAccidentBrief != null) {
+                    if (SettingVerify.isNetworkConnected(MainActivity.this)) {updateReportedIncidentInfo();clearReportedincidentIfClosed();}
+                    if(!isFinishing()){
+                    currentRescReqDialog.show();}
+                } else {
+                    currentRescReqDialog.cancel();
                 }
                 mainHandler.postDelayed(this, 1000);
-
             }
         };
     }
@@ -245,17 +251,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void setFalseOrCancel(View view) {
         if (currentCancelTapTimes < CANCEL_TAP_TIMES) {
-            ((Button) view).setText(getResources().getString(R.string.crashsrvc_cancel_request).concat(" (").concat(String.valueOf(CANCEL_TAP_TIMES - currentCancelTapTimes)).concat(")"));
             ++currentCancelTapTimes;
         } else {
             dismissLatestRescueRequest();
             currentCancelTapTimes = 0;
             currentRescReqDialog.cancel();
-
         }
+        ((Button) view).setText(getResources().getString(R.string.crashsrvc_cancel_request).concat(" (").concat(String.valueOf(CANCEL_TAP_TIMES - currentCancelTapTimes)).concat(")"));
     }
 
-    private AccidentBrief latestAccidentBrief;
+
     private void dismissLatestRescueRequest(){ //Or Set 'False'
         if(!realm.isInTransaction()){realm.beginTransaction();}
         latestAccidentBrief = realm.where(AccidentBrief.class).findFirst();
@@ -263,11 +268,30 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Unsuccessful, You have no Incident which is Reported.", Toast.LENGTH_LONG).show();
             return;
         }
-        if (WWTo.setUserFalseAccidentId(this, latestAccidentBrief.getAccidentId())) {
+        if (WWTo.setUserFalseAccidentId(this, latestAccidentBrief.getAccidentId(), latestAccidentBrief.getUserId())) {
             Toast.makeText(this, getResources().getString(R.string.crashsrvc_cancel_request), Toast.LENGTH_LONG).show();
-            realm.delete(AccidentBrief.class);
+            latestAccidentBrief.deleteFromRealm();
         }
         realm.commitTransaction();
+    }
+
+    public void updateReportedIncidentInfo(){
+        if(latestAccidentBrief == null){return;}
+        Accident.setInstance(WWTo.updateCurrentReportedIncident(this, latestAccidentBrief.getAccidentId()));
+    }
+
+    private void clearReportedincidentIfClosed(){
+        Log.d("CLOESED?", Accident.getInstance().toString());
+        Log.d("latestAccidentBrief?", latestAccidentBrief.toString());
+        if(Accident.getInstance().getAccCode() == Accident.ACC_CODE_C){
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    Log.d("we going", "del");
+                    realm.where(AccidentBrief.class).findAll().deleteAllFromRealm();
+                }
+            });
+        }
     }
 
 }

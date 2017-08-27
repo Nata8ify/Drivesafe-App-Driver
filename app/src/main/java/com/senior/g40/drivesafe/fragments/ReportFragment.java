@@ -144,7 +144,7 @@ public class ReportFragment extends Fragment {
             Toast.makeText(getContext(), "Unsuccessful, You have no Incident which is Reported.", Toast.LENGTH_LONG).show();
             return;
         }
-        if (WWTo.setUserFalseAccidentId(getContext(), latestAccidentBrief.getAccidentId())) {
+        if (WWTo.setUserFalseAccidentId(getContext(), latestAccidentBrief.getAccidentId(), latestAccidentBrief.getUserId())) {
             Toast.makeText(getContext(), getResources().getString(R.string.crashsrvc_cancel_request), Toast.LENGTH_LONG).show();
             realm.delete(AccidentBrief.class);
         }

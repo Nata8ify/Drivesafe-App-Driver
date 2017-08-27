@@ -238,6 +238,21 @@ public class WWTo {
         return new GsonBuilder().setDateFormat("yyyy-MM-dd").create().fromJson(response, Accident.class);
     }
 
+    public static Accident updateCurrentReportedIncident(@NonNull Context context, long accidentId) {
+        try {
+            return  Ion.with(context)
+                    .load(WWProp.URI.GET_UPDATE_REPORTED_INCIDENT)
+                    .setBodyParameter(WWProp.PARAM.ACCID, String.valueOf(accidentId))
+                    .as(Accident.class)
+                    .get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static boolean setSystemFalseAccident(Context context, Accident accident) {
         try {
             boolean isSuccess = Boolean.parseBoolean(Ion.with(context)
@@ -261,6 +276,7 @@ public class WWTo {
             response = Ion.with(context)
                     .load(WWProp.URI.USR_FALSE_CRASH)
                     .setBodyParameter(WWProp.PARAM.ACCID, String.valueOf(accident.getAccidentId()))
+                    .setBodyParameter(WWProp.PARAM.USRID, String.valueOf(accident.getUserId()))
                     .asString()
                     .get().trim();
             Log.v("boolean res", response);
@@ -273,12 +289,13 @@ public class WWTo {
         return false;
     }
 
-    public static boolean setUserFalseAccidentId(Context context, long accidentId) {
+    public static boolean setUserFalseAccidentId(Context context, long accidentId, long userId) {
         String response = null;
         try {
             response = Ion.with(context)
                     .load(WWProp.URI.USR_FALSE_CRASH)
                     .setBodyParameter(WWProp.PARAM.ACCID, String.valueOf(accidentId))
+                    .setBodyParameter(WWProp.PARAM.USERID, String.valueOf(userId))
                     .asString()
                     .get().trim();
             Log.v("boolean res", response);

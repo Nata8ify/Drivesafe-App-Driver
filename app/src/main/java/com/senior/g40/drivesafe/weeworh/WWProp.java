@@ -14,6 +14,7 @@ public class WWProp {
         public static final String INCIDENT_REPORT = WEEWORH_HOST + "ReporterAppIn?opt=report";
         public static final String SYS_FALSE_CRASH = WEEWORH_HOST + "ReporterAppIn?opt=sys_accfalse";
         public static final String USR_FALSE_CRASH = WEEWORH_HOST + "ReporterAppIn?opt=usr_accfalse";
+        public static final String GET_UPDATE_REPORTED_INCIDENT = WEEWORH_HOST + "ReporterAppIn?opt=update_accident_info";
     }
     public class PARAM {
         /* Login Parameters */
@@ -27,6 +28,7 @@ public class WWProp {
         public static final String FDT = "fdt"; // Force Detect
         public static final String SDT = "sdt"; // Speed Detect
         public static final String USRID = "usrid"; // UserID
+        public static final String USERID = "userId"; // UserID
         public static final String ACCCO = "accc"; // Accident Code
         public static final String ACTYP = "acctype"; // Accident Type
         public static final String ACCID = "accid"; // Accident ID
