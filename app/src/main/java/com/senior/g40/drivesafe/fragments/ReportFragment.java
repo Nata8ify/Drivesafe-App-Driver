@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.ebanx.swipebtn.OnStateChangeListener;
+import com.ebanx.swipebtn.SwipeButton;
 import com.senior.g40.drivesafe.AlertActivity;
 import com.senior.g40.drivesafe.R;
 import com.senior.g40.drivesafe.engines.CrashingSensorEngines;
@@ -40,6 +42,17 @@ public class ReportFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        SwipeButton btnSwipe = (SwipeButton) getView().findViewById(R.id.btn_swipe);
+        btnSwipe.setOnStateChangeListener (new OnStateChangeListener() {
+            @Override
+            public void onStateChange(boolean active) {
+                Accident crashAcc = WWTo.crashRescueRequest(getContext(), LocationUtils.getInstance(getContext()).getLat(), LocationUtils.getInstance(getContext()).getLng());
+                Accident.setInstance(crashAcc);
+                save();
+            }
+        });
+
 
         Button btnReportCrash = (Button) getView().findViewById(R.id.btn_crash_opt);
         btnReportCrash.setOnLongClickListener(new View.OnLongClickListener() {
