@@ -2,8 +2,6 @@ package com.senior.g40.drivesafe.engines;
 
 import android.content.Context;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.koushikdutta.ion.Ion;
 import com.senior.g40.drivesafe.models.Profile;
 import com.senior.g40.drivesafe.weeworh.WWProp;

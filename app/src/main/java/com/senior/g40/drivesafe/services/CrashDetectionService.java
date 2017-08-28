@@ -2,22 +2,17 @@ package com.senior.g40.drivesafe.services;
 
 import android.app.IntentService;
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 
 import com.senior.g40.drivesafe.AlertActivity;
-import com.senior.g40.drivesafe.MainActivity;
 import com.senior.g40.drivesafe.R;
 import com.senior.g40.drivesafe.engines.CrashingSensorEngines;
 import com.senior.g40.drivesafe.fragments.ActivateFragment;

@@ -1,24 +1,17 @@
 package com.senior.g40.drivesafe.engines;
 
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
-import android.os.CountDownTimer;
 import android.os.Handler;
-import android.os.Vibrator;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.senior.g40.drivesafe.MainActivity;
 import com.senior.g40.drivesafe.R;
 import com.senior.g40.drivesafe.models.Accident;
 import com.senior.g40.drivesafe.utils.LocationUtils;

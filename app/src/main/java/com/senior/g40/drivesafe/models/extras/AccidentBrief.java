@@ -2,8 +2,6 @@ package com.senior.g40.drivesafe.models.extras;
 
 import com.senior.g40.drivesafe.models.Accident;
 
-import java.sql.Date;
-
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
