@@ -105,8 +105,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="* Hold button to report"
-        android:textSize="25dp"
-        android:gravity="right"
+        android:textSize="18dp"
+        android:gravity="center_horizontal"
         />
         <Button
             android:id="@+id/btn_userfalse"

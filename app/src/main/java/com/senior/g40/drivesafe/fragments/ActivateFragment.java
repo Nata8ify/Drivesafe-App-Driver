@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -26,9 +27,13 @@ import com.senior.g40.drivesafe.utils.LocationUtils;
 
 
 public class ActivateFragment extends Fragment {
+
+    private Handler activateFragmentHandler;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        activateFragmentHandler = new Handler();
         return inflater.inflate(R.layout.fragment_activate, container, false);
     }
 
@@ -57,32 +62,17 @@ public class ActivateFragment extends Fragment {
                     getActivity().startService(service);
                 } else {
                     btnActiveDrivesafe.setText(getResources().getString(R.string.main_drvactive));
+                    activateFragmentHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            txtGs.setText("CRASHING SENSOR STOP");
+                        }
+                    }, 100);
                     getActivity().stopService(service);
-                    txtGs.setText(" G's : CRASHING SENSOR STOP");
+
                 }
             }
         });
-
-/*
-
-    public void validatePermission() {
-        // Performs Permission Checking.
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, GRANT_FINE_LOCATION);
-    }
-
-    private final int GRANT_FINE_LOCATION = 1;
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (grantResults[0] == RESULT_CANCELED) {
-            switch (requestCode) {
-                case GRANT_FINE_LOCATION:
-                    break;
-            }
-        } else {
-            toast("Permission is required, without this permission, application will be terminated.");
-            finish();
-        }*/
     }
 
 
