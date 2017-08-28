@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 
 import com.senior.g40.drivesafe.engines.CrashingSensorEngines;
+import com.senior.g40.drivesafe.engines.GPSVerifierAsyncTask;
 import com.senior.g40.drivesafe.fragments.ActivateFragment;
 import com.senior.g40.drivesafe.fragments.ReportFragment;
 import com.senior.g40.drivesafe.models.Accident;
@@ -93,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mainHandler = new Handler();
+        new GPSVerifierAsyncTask(this).execute();
         connectivityDialog = new AlertDialog.Builder(MainActivity.this)
                 .setMessage(getResources().getString(R.string.warn_no_network_and_please))
                 .setPositiveButton(getResources().getString(R.string.goto_setting), new DialogInterface.OnClickListener() {
@@ -142,6 +144,12 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         mainHandler.post(connectivityRunnable);
         mainHandler.post(currentRescReqRunnable);
+    }
+
+    @Override
+    protected void onResume() {
+        LocationUtils.getInstance(this).startLocationUpdate();
+        super.onResume();
     }
 
     @Override

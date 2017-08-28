@@ -43,7 +43,9 @@ public class ActivateFragment extends Fragment {
         final CrashingSensorEngines crashingSensorEngines;
         crashingSensorEngines = CrashingSensorEngines.getInstance(getContext());
         crashingSensorEngines.setTxtviewOut(txtGs);
-
+        if(CrashingSensorEngines.isRunning){
+            btnActiveDrivesafe.setText(getResources().getString(R.string.main_drvdeactive));
+        }
 
 
         btnActiveDrivesafe.setOnClickListener(new View.OnClickListener() {
@@ -52,12 +54,10 @@ public class ActivateFragment extends Fragment {
                 activateState[0] = 1 - activateState[0];
                 if (activateState[0] == 1) {
                     btnActiveDrivesafe.setText(getResources().getString(R.string.main_drvdeactive));
-//                    crashingSensorEngines.start();
                     getActivity().startService(service);
                 } else {
                     btnActiveDrivesafe.setText(getResources().getString(R.string.main_drvactive));
                     getActivity().stopService(service);
-//                    crashingSensorEngines.stop();
                     txtGs.setText(" G's : CRASHING SENSOR STOP");
                 }
             }

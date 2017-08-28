@@ -10,6 +10,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 
 /**
  * Created by PNattawut on 26-Mar-17.
@@ -50,12 +51,12 @@ public class LocationUtils {
 
             @Override
             public void onStatusChanged(String provider, int status, Bundle extras) {
-
+                Log.d("onStatusChanged", provider+" :: "+status+" :: "+extras.toString());
             }
 
             @Override
             public void onProviderEnabled(String provider) {
-
+                Log.d("onStatusChanged", provider);
             }
 
             @Override

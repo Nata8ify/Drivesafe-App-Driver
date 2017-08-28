@@ -36,7 +36,6 @@ public class CrashingSensorEngines implements SensorEventListener {
     private static MediaPlayer accMediaPlayer;
 
     private static CrashingSensorEngines crashingSensorEngines;
-    private static LocationUtils accLocationUtils;
 
 
     public static CrashingSensorEngines getInstance(Context context) {
@@ -50,16 +49,18 @@ public class CrashingSensorEngines implements SensorEventListener {
             accSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         }
 
-        accLocationUtils = LocationUtils.getInstance(context);
         return crashingSensorEngines;
 
     }
 
+    public static boolean isRunning;
     public void start() {
         sensorManager.registerListener(this, accSensor, SensorManager.SENSOR_DELAY_UI);
+        isRunning = true;
     }
 
     public void stop() {
+        isRunning = false;
         sensorManager.unregisterListener(this);
     }
 
@@ -69,7 +70,6 @@ public class CrashingSensorEngines implements SensorEventListener {
     public static double accLinear;
     public static double gs;
     public static double fixedGs;
-
 
     private boolean reqState;
     public String verbose;
@@ -82,12 +82,11 @@ public class CrashingSensorEngines implements SensorEventListener {
         accZ = event.values[2];
         accLinear = Math.sqrt(((accX * accX) + (accY * accY) + (accZ * accZ)));
         gs = accLinear / 9.8;
-        if (accLocationUtils.getLng() != 0.0f & accLocationUtils.getLng() != 0.0f) { //<-- Please use something waiting or somethings.
-            this.txtOut.setText(" G's : " + String.valueOf(gs) + "\n Lat: " + accLocationUtils.getLat() + "| Lng: " + accLocationUtils.getLng());
+        this.txtOut.setText(" G's : " + String.valueOf(gs) + "\n Lat: " + LocationUtils.lat + "| Lng: " + LocationUtils.lng);
             if (gs >= Accident.GS_DEBUG && !reqState) {
                 fixedGs = gs;
                 accMediaPlayer.start();
-            }
+
         }
     }
 
@@ -111,8 +110,8 @@ public class CrashingSensorEngines implements SensorEventListener {
         falseWatcherRunnable = new Runnable() {
             @Override
             public void run() {
-                if (accLocationUtils.getSpeed() > 0) {
-                    Toast.makeText(context, "False Accident Detected" + accLocationUtils.getLng(), Toast.LENGTH_LONG).show();
+                if (LocationUtils.speed > 0) {
+                    Toast.makeText(context, "False Accident Detected", Toast.LENGTH_LONG).show();
                     boolean isSuccess = WWTo.setSystemFalseAccident(context, Accident.getInstance());
                     Log.v("isSuccess: ", isSuccess + "");
                     try {
