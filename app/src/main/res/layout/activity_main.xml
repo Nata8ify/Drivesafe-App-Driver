@@ -21,75 +21,78 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
-            <LinearLayout
+            android:orientation="horizontal"
+            android:padding="5dp">
+            <Button
+                android:id="@+id/btn_crash_opt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:text="@string/main_report_carcrash_opt"
+                style="@style/btn_report"/>
 
-                <Button
-                    android:id="@+id/btn_crash_opt"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/main_report_carcrash_opt"/>
-
-                <Button
-                    android:id="@+id/btn_fire_opt"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/main_report_fire_opt" />
-            </LinearLayout>
-
-            <LinearLayout
+            <Button
+                android:id="@+id/btn_fire_opt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btn_patient_opt"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/main_report_patient_opt" />
-
-                <Button
-                    android:id="@+id/btn_animal_opt"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/main_report_animal_opt" />
-                <Button
-                    android:id="@+id/btn_brawl_opt"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/main_report_brawl_opt" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-                <Button
-                    android:id="@+id/btn_other_opt"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/main_report_other_opt" />
-            </LinearLayout>
+                android:text="@string/main_report_fire_opt"
+                style="@style/btn_report"/>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:padding="5dp">
+            <Button
+                android:id="@+id/btn_patient_opt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/main_report_patient_opt"
+                style="@style/btn_report"/>
+
+            <Button
+                android:id="@+id/btn_animal_opt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/main_report_animal_opt"
+                style="@style/btn_report"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:padding="5dp">
+            <Button
+                android:id="@+id/btn_brawl_opt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/main_report_brawl_opt"
+                style="@style/btn_report"/>
+
+            <Button
+                android:id="@+id/btn_other_opt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/main_report_other_opt"
+                style="@style/btn_report"/>
+        </LinearLayout>
+    </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -116,20 +119,13 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
 
-        </LinearLayout>
-    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-
 
         <Button
             android:id="@+id/btn_activeDrivesafeService"
@@ -138,4 +134,5 @@
             android:text="@string/main_drvactiveserv"
             android:visibility="gone" />
     </LinearLayout>
+
 </LinearLayout>
