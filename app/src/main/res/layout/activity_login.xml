@@ -11,85 +11,95 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.senior.g40.drivesafe.LoginActivity">
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="0dp">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="0dp">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/icon" />
+
+            </LinearLayout>
             android:layout_gravity="center"
-            android:src="@mipmap/icon" />
+            android:text="@string/app_name"
+            android:textSize="24dp"
+            android:textStyle="bold" />
 
-    </LinearLayout>
-        android:layout_gravity="center"
-        android:text="@string/app_name"
-        android:textSize="24dp"
-        android:textStyle="bold" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#f4f4f4"
-        android:orientation="vertical"
-        android:padding="20dp">
-
-        <TextView
-            android:id="@+id/txt_headMessage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#f00"
-            android:visibility="gone" />
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/edtxt_loginUsername"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/login_username"
-                android:text="user003" />
-        </android.support.design.widget.TextInputLayout>
+                android:background="#f4f4f4"
+                android:orientation="vertical"
+                android:padding="20dp">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/txt_headMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#f00"
+                    android:visibility="gone" />
 
-            <EditText
-                android:id="@+id/edtxt_loginPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/login_password"
-                android:inputType="textPassword"
-                android:text="user003" />
-        </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        <CheckBox
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login_remember"
-            android:id="@+id/chkbox_remember"/>
+                    <EditText
+                        android:id="@+id/edtxt_loginUsername"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/login_username"
+                        android:text="user003" />
+                </android.support.design.widget.TextInputLayout>
 
-        <Button
-            android:id="@+id/btn_login"
-            style="@style/btn_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login_login" />
-        android:text="@string/login_login" />
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/btn_register"
-            style="@style/btn_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login_register" />
-        android:text="@string/login_register" />
-    </LinearLayout>
+                    <EditText
+                        android:id="@+id/edtxt_loginPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/login_password"
+                        android:inputType="textPassword"
+                        android:text="user003" />
+                </android.support.design.widget.TextInputLayout>
+
+                <CheckBox
+                    android:id="@+id/chkbox_remember"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login_remember" />
+
+                <Button
+                    android:id="@+id/btn_login"
+                    style="@style/btn_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login_login" />
+                android:text="@string/login_login" />
+
+                <Button
+                    android:id="@+id/btn_register"
+                    style="@style/btn_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login_register" />
+                android:text="@string/login_register" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

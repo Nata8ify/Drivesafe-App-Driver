@@ -31,6 +31,7 @@ public class UserEngines {
         try {
             profile = Ion.with(appContext)
                     .load(WWProp.URI.LOGIN)
+                    .setTimeout(5000)
                     .setBodyParameter(WWProp.PARAM.USRN, username)
                     .setBodyParameter(WWProp.PARAM.PSWD, password)
                     .as(Profile.class)

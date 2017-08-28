@@ -126,8 +126,7 @@
         android:layout_height="wrap_content"
         android:text="* Hold button to report"
         android:textSize="18dp"
-        android:gravity="center_horizontal"
-        />
+        android:gravity="center_horizontal"/>
         <Button
             android:id="@+id/btn_userfalse"
             android:layout_width="match_parent"
@@ -135,9 +134,4 @@
             android:text="@string/main_userfalse"
             style="@style/btn_safe"
             android:visibility="gone"/>
-
-
-
-
-
 </LinearLayout>
