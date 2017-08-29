@@ -1,14 +1,17 @@
 package com.senior.g40.drivesafe.fragments;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.gson.JsonSyntaxException;
 import com.senior.g40.drivesafe.R;
 import com.senior.g40.drivesafe.models.Accident;
 import com.senior.g40.drivesafe.models.extras.AccidentBrief;
@@ -40,9 +43,10 @@ public class ReportFragment extends Fragment {
         btnReportCrash.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                Accident crashAcc = WWTo.crashRescueRequest(getContext(), LocationUtils.getInstance(getContext()).getLat(), LocationUtils.getInstance(getContext()).getLng());
-                Accident.setInstance(crashAcc);
-                save();
+                    Accident crashAcc = WWTo.crashRescueRequest(getContext(), LocationUtils.getInstance(getContext()).getLat(), LocationUtils.getInstance(getContext()).getLng());
+                    if(crashAcc == null){alertDuplicatedReport(); return false;}
+                    Accident.setInstance(crashAcc);
+                    save();
                 return false;
             }
 
@@ -54,6 +58,7 @@ public class ReportFragment extends Fragment {
             @Override
             public boolean onLongClick(View view) {
                 Accident fireAcc = WWTo.fireRescueRequest(getContext(), LocationUtils.getInstance(getContext()).getLat(), LocationUtils.getInstance(getContext()).getLng());
+                if(fireAcc == null){alertDuplicatedReport(); return false;}
                 Accident.setInstance(fireAcc);
                 save();
                 return false;
@@ -66,6 +71,7 @@ public class ReportFragment extends Fragment {
             @Override
             public boolean onLongClick(View view) {
                 Accident brawlAcc = WWTo.brawlRescueRequest(getContext(), LocationUtils.getInstance(getContext()).getLat(), LocationUtils.getInstance(getContext()).getLng());
+                if(brawlAcc == null){alertDuplicatedReport(); return false;}
                 Accident.setInstance(brawlAcc);
                 save();
                 return false;
@@ -78,6 +84,7 @@ public class ReportFragment extends Fragment {
             @Override
             public boolean onLongClick(View view) {
                 Accident patientAcc = WWTo.patientRescueRequest(getContext(), LocationUtils.getInstance(getContext()).getLat(), LocationUtils.getInstance(getContext()).getLng());
+                if(patientAcc == null){alertDuplicatedReport(); return false;}
                 Accident.setInstance(patientAcc);
                 save();
                 return false;
@@ -90,6 +97,7 @@ public class ReportFragment extends Fragment {
             @Override
             public boolean onLongClick(View view) {
                 Accident animalAcc = WWTo.animalRescueRequest(getContext(), LocationUtils.getInstance(getContext()).getLat(), LocationUtils.getInstance(getContext()).getLng());
+                if(animalAcc == null){alertDuplicatedReport(); return false;}
                 Accident.setInstance(animalAcc);
                 save();
                 return false;
@@ -102,6 +110,7 @@ public class ReportFragment extends Fragment {
             @Override
             public boolean onLongClick(View view) {
                 Accident otherAcc = WWTo.otherRescueRequest(getContext(), LocationUtils.getInstance(getContext()).getLat(), LocationUtils.getInstance(getContext()).getLng());
+                if(otherAcc == null){alertDuplicatedReport(); return false;}
                 Accident.setInstance(otherAcc);
                 save();
                 return false;
@@ -144,6 +153,23 @@ public class ReportFragment extends Fragment {
             realm.delete(AccidentBrief.class);
         }
         realm.commitTransaction();
+    }
+
+    private AlertDialog duplicatedReportDialog;
+    private void alertDuplicatedReport(){
+        if(duplicatedReportDialog == null){
+            duplicatedReportDialog = new AlertDialog.Builder(getContext())
+                    .setTitle(getString(R.string.main_report_we_copy))
+                    .setMessage(getString(R.string.main_report_alert_reported))
+                    .setPositiveButton(getString(R.string.close), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .create();
+        }
+        duplicatedReportDialog.show();
     }
 }
 

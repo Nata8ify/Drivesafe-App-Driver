@@ -135,6 +135,7 @@ public class WWTo {
                     .asString()
                     .get();
             Log.v("res", response);
+            return new GsonBuilder().setDateFormat("yyyy-MM-dd").create().fromJson(response, Accident.class);
         } catch (InterruptedException e) {
             e.printStackTrace();
             Log.v("res 1", response);
@@ -142,7 +143,7 @@ public class WWTo {
             e.printStackTrace();
             Log.v("res 2", response);
         }
-        return new GsonBuilder().setDateFormat("yyyy-MM-dd").create().fromJson(response, Accident.class);
+        return null;
     }
 
     /**
