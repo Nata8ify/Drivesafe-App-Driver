@@ -1,6 +1,9 @@
 package com.senior.g40.drivesafe.fragments;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -171,6 +174,61 @@ public class ReportFragment extends Fragment {
         }
         duplicatedReportDialog.show();
     }
+
+
+    class ReportAsyncttask extends AsyncTask {
+
+        private Context context;
+        private ProgressDialog progressDialog;
+        private AlertDialog alertDialog;
+        private Object[] params;
+        private Accident accident;
+        public ReportAsyncttask(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage(getString(R.string.sending_rescue_req));
+            progressDialog.show();
+
+            alertDialog = new AlertDialog.Builder(context)
+                    .setMessage(getString(R.string.warn_report_failed))
+                    .setNegativeButton(getString(R.string.close), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            alertDialog.cancel();
+                        }
+                    })
+                    .setPositiveButton(getString(R.string.try_again), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .create();
+        }
+
+        @Override
+        protected Object doInBackground(Object[] params) {
+            this.params = params;
+            this.accident = WWTo.rescueRequest(context, (double)params[0], (double)params[1], (byte)params[2]);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
+            if(this.accident == null){
+               this.execute(this.params);
+            }
+            progressDialog.cancel();
+        }
+    }
+
 }
 
 

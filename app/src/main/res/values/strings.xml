@@ -53,11 +53,16 @@
     <string name="on">ON</string>
     <string name="off">OFF</string>
     <string name="inprogress">In Progress</string>
+    <string name="sending_rescue_req">Sending Rescue Request...</string>
     <string name="loading">Loading...</string>
+    <string name="try_again">Try again</string>
     <string name="goto_setting">Go to Setting</string>
 
     <!--Warning-->
     <string name="warn_no_network">A Network Connectivity isn\'t Available</string>
     <string name="warn_no_network_and_please">A Network Connectivity isn\'t Available, Please Enable WIFI or 3G/4G to Continue.</string>
+    <string name="warn_report_failed"><b>Report Failed, Please check there are internet connectivity on this phone. or you can try to send this request again.</b></string>
+    <string name="warn_login_failed"><b>Login Failed</b></string>
+    <string name="warn_login_failed_causes"><b>Please be ensure.. </b>  \n\n 1. <u>The Internet Connection</u> is Available for Weeworh \n\n 2. <u>Username and Password</u> is Corrected.</string>
 
 </resources>
