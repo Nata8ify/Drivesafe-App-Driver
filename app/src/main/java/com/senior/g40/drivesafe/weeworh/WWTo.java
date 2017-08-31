@@ -154,6 +154,37 @@ public class WWTo {
      * @param longitude Incident Location's Longitude.
      * @return The Incident Information after it was stored.
      */
+    public static Accident rescueRequest(@NonNull Context context, @NonNull double latitude, @NonNull double longitude, @NonNull byte accType) {
+        String response = null;
+        Log.v("latlng", latitude + "::::" + longitude + "::" + String.valueOf(Accident.ACC_TYPE_ANIMAL));
+        try {
+            response = Ion.with(context)
+                    .load(WWProp.URI.INCIDENT_REPORT)
+                    .setBodyParameter(WWProp.PARAM.USRID, String.valueOf(Profile.getInsatance().getUserId()))
+                    .setBodyParameter(WWProp.PARAM.LAT, String.valueOf(latitude))
+                    .setBodyParameter(WWProp.PARAM.LNG, String.valueOf(longitude))
+                    .setBodyParameter(WWProp.PARAM.ACTYP, String.valueOf(accType))
+                    .asString()
+                    .get();
+            Log.v("res", response);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            Log.v("res 1", response);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            Log.v("res 2", response);
+        }
+        return new GsonBuilder().setDateFormat("yyyy-MM-dd").create().fromJson(response, Accident.class);
+    }
+
+    /**
+     * Report Animal Incident
+     *
+     * @param context   Sending Activity's Context.
+     * @param latitude  Incident Location's Latitude.
+     * @param longitude Incident Location's Longitude.
+     * @return The Incident Information after it was stored.
+     */
     public static Accident animalRescueRequest(@NonNull Context context, @NonNull double latitude, @NonNull double longitude) {
         String response = null;
         Log.v("latlng", latitude + "::::" + longitude + "::" + String.valueOf(Accident.ACC_TYPE_ANIMAL));

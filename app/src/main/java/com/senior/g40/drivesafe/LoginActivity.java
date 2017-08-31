@@ -1,6 +1,7 @@
 package com.senior.g40.drivesafe;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -73,19 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         if (SettingVerify.isNetworkConnected(this)) {
             switch (view.getId()) {
                 case R.id.btn_login:
-                    if (UserEngines.getInstance(this)
-                            .login(edtxtLoginUsername.getText().toString(), edtxtLoginPassword.getText().toString())) {
-                        if(chkboxRemember.isChecked()){
-                            realm.beginTransaction();
-                            realm.insert(Profile.getInsatance());
-                            realm.commitTransaction();
-                        }
-                        startActivity(new Intent(this, MainActivity.class));
-                        finish();
-                    } else {
-                        txtHeadMessage.setVisibility(View.VISIBLE);
-                        txtHeadMessage.setText(getResources().getString(R.string.login_nouser));
-                    }
+                    new LoginAsyncTask(LoginActivity.this).execute();
                     break;
                 case R.id.btn_register:
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(WWProp.WEEWORH_HOST)));
@@ -112,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                if(realm.where(Profile.class).findFirst() != null){
+                if (realm.where(Profile.class).findFirst() != null) {
                     Profile.createInsatance(realm.where(Profile.class).findFirst());
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     LoginActivity.this.finish();
@@ -122,20 +111,66 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.cancel();
     }
 
-    class LoginAsyncTask extends AsyncTask{
+    class LoginAsyncTask extends AsyncTask {
+
+        private Context context;
+        private ProgressDialog progressDialog;
+        private AlertDialog alertDialog;
+        private boolean isSuccess;
+        private String username;
+        private String password;
+
+        public LoginAsyncTask(Context context) {
+            this.context = context;
+        }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setMessage(getString(R.string.loading));
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            alertDialog = new AlertDialog.Builder(context)
+                    .setTitle(getString(R.string.warn_login_failed))
+                    .setMessage(getString(R.string.warn_login_failed_causes))
+                    .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            alertDialog.cancel();
+                        }
+                    })
+                    .setCancelable(false)
+                    .create();
+
+            username = edtxtLoginUsername.getText().toString();
+            password = edtxtLoginPassword.getText().toString();
+        }
+
+        @Override
+        protected Object doInBackground(Object[] params) {
+            isSuccess = UserEngines.getInstance(this.context)
+                    .login(username, password);
+
+            return null;
         }
 
         @Override
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
+            if (isSuccess) {
+                if (chkboxRemember.isChecked()) {
+                    realm.beginTransaction();
+                    realm.insert(Profile.getInsatance());
+                    realm.commitTransaction();
+                }
+                startActivity(new Intent(this.context, MainActivity.class));
+                finish();
+            } else {
+                alertDialog.show();
+            }
+            progressDialog.cancel();
         }
 
-        @Override
-        protected Object doInBackground(Object[] params) {
-            return null;
-        }
     }
 }
