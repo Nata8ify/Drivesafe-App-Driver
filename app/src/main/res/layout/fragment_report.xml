@@ -8,38 +8,57 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:orientation="vertical"
-        android:padding="5dp">
+        android:layout_weight="1">
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.2"
             android:orientation="vertical"
-            android:padding="5dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Report Incident"
-            android:textSize="40dp"
-            android:gravity="center"
-            android:layout_weight="1" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:padding="5dp">
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Hold button to report"
+                android:textSize="40dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:src="@drawable/acctype_crash" />
+
                 <Button
                     android:id="@+id/btn_crash_opt"
+                    style="@style/btn_report"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/main_report_carcrash_opt"
-                    style="@style/btn_report"
-                    android:textSize="20dp"/>
+                    android:textSize="25dp" />
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/acctype_fire"
+                    android:layout_weight="3" />
                 <Button
                     android:id="@+id/btn_fire_opt"
                     android:layout_width="match_parent"
@@ -47,14 +66,19 @@
                     android:layout_weight="1"
                     android:text="@string/main_report_fire_opt"
                     style="@style/btn_report"
-                    android:textSize="20dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:padding="5dp">
+                    android:textSize="25dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/acctype_patient"
+                    android:layout_weight="3" />
                 <Button
                     android:id="@+id/btn_patient_opt"
                     android:layout_width="match_parent"
@@ -62,8 +86,19 @@
                     android:layout_weight="1"
                     android:text="@string/main_report_patient_opt"
                     style="@style/btn_report"
-                    android:textSize="20dp"/>
+                    android:textSize="25dp"/>
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/acctype_animal"
+                    android:layout_weight="3" />
                 <Button
                     android:id="@+id/btn_animal_opt"
                     android:layout_width="match_parent"
@@ -71,23 +106,40 @@
                     android:layout_weight="1"
                     android:text="@string/main_report_animal_opt"
                     style="@style/btn_report"
-                    android:textSize="20dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:padding="5dp">
+                    android:textSize="25dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/acctype_brawl"
+                    android:layout_weight="3" />
                 <Button
+
                     android:id="@+id/btn_brawl_opt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/main_report_brawl_opt"
                     style="@style/btn_report"
-                    android:textSize="20dp"/>
+                    android:textSize="25dp"/>
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/acctype_other"
+                    android:layout_weight="3" />
                 <Button
                     android:id="@+id/btn_other_opt"
                     android:layout_width="match_parent"
@@ -95,22 +147,19 @@
                     android:layout_weight="1"
                     android:text="@string/main_report_other_opt"
                     style="@style/btn_report"
-                    android:textSize="20dp"/>
+                    android:textSize="25dp"/>
+            </LinearLayout>
+
         </LinearLayout>
-
-
     </LinearLayout>
-    <TextView
+
+
+
+    <Button
+        android:id="@+id/btn_userfalse"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="* Hold button to report"
-        android:textSize="18dp"
-        android:gravity="center_horizontal"/>
-        <Button
-            android:id="@+id/btn_userfalse"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/main_userfalse"
-            style="@style/btn_safe"
-            android:visibility="gone"/>
+        android:layout_height="match_parent"
+        android:text="@string/main_userfalse"
+        style="@style/btn_safe"
+        android:visibility="gone"/>
 </LinearLayout>
