@@ -4,6 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="?android:dividerVertical"
+        android:showDividers="middle"
+        android:orientation="vertical"
+        >
+
     <TextView
         android:padding="5dp"
         android:layout_width="match_parent"
@@ -13,21 +22,27 @@
         android:textStyle="bold"
         android:gravity="center"
         android:layout_weight="5" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:divider="?android:dividerHorizontal"
+        android:gravity="center"
+        android:showDividers="middle" >
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:divider="?android:dividerVertical"
+            android:showDividers="middle">
 
             <LinearLayout
+                android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -51,6 +66,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -71,6 +87,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -96,8 +113,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:divider="?android:dividerVertical"
+            android:showDividers="middle">
         <LinearLayout
+                android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -119,6 +139,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -141,6 +162,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -162,7 +184,7 @@
             </LinearLayout>
     </LinearLayout>
     </LinearLayout>
-
+    </LinearLayout>
 
 
     <Button
