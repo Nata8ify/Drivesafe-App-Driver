@@ -4,38 +4,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <TextView
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Hold button to report"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_weight="5" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_weight="1">
 
 
-
-
-            <TextView
-                android:padding="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Hold button to report"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                />
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <ImageView
-                    android:padding="10dp"
+
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="3"
+                    android:layout_weight="1"
                     android:src="@drawable/acctype_crash" />
 
                 <Button
@@ -51,14 +53,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_weight="1">
                 <ImageView
-                    android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/acctype_fire"
-                    android:layout_weight="3" />
+                    android:layout_weight="1" />
                 <Button
                     android:id="@+id/btn_fire_opt"
                     android:layout_width="match_parent"
@@ -72,14 +73,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_weight="1">
                 <ImageView
-                    android:padding="10dp"
+
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/acctype_patient"
-                    android:layout_weight="3" />
+                    android:layout_weight="1" />
                 <Button
                     android:id="@+id/btn_patient_opt"
                     android:layout_width="match_parent"
@@ -89,18 +90,24 @@
                     style="@style/btn_report"
                     android:textSize="15sp"/>
             </LinearLayout>
+        </LinearLayout>
 
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_weight="1">
                 <ImageView
-                    android:padding="10dp"
+
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/acctype_animal"
-                    android:layout_weight="3" />
+                    android:layout_weight="1" />
                 <Button
                     android:id="@+id/btn_animal_opt"
                     android:layout_width="match_parent"
@@ -114,14 +121,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_weight="1">
                 <ImageView
-                    android:padding="10dp"
+
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/acctype_brawl"
-                    android:layout_weight="3" />
+                    android:layout_weight="1" />
                 <Button
 
                     android:id="@+id/btn_brawl_opt"
@@ -136,14 +143,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_weight="1">
                 <ImageView
-                    android:padding="10dp"
+
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/acctype_other"
-                    android:layout_weight="3" />
+                    android:layout_weight="1" />
                 <Button
                     android:id="@+id/btn_other_opt"
                     android:layout_width="match_parent"
@@ -153,7 +160,7 @@
                     style="@style/btn_report"
                     android:textSize="15sp"/>
             </LinearLayout>
-
+    </LinearLayout>
     </LinearLayout>
 
 
