@@ -20,8 +20,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Crash Detection Mode"
-            android:textSize="30dp"
-            android:layout_marginTop="40dp"/>
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="40dp" />
 
     </LinearLayout>
     <LinearLayout
@@ -36,7 +37,7 @@
             android:layout_height="270dp"
             android:text="@string/main_drvactive"
             android:background="@drawable/round_button"
-            android:textSize="20dp"/>
+            android:textSize="20sp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

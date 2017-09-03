@@ -12,20 +12,18 @@
         android:layout_weight="1">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
+
 
             <TextView
+                android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Hold button to report"
-                android:textSize="40dp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:layout_weight="1" />
+                />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -34,6 +32,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
@@ -46,7 +45,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/main_report_carcrash_opt"
-                    android:textSize="25dp" />
+                    android:textSize="15sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -55,6 +54,7 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
                 <ImageView
+                    android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/acctype_fire"
@@ -66,7 +66,7 @@
                     android:layout_weight="1"
                     android:text="@string/main_report_fire_opt"
                     style="@style/btn_report"
-                    android:textSize="25dp"/>
+                    android:textSize="15sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -75,6 +75,7 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
                 <ImageView
+                    android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/acctype_patient"
@@ -86,7 +87,7 @@
                     android:layout_weight="1"
                     android:text="@string/main_report_patient_opt"
                     style="@style/btn_report"
-                    android:textSize="25dp"/>
+                    android:textSize="15sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -95,6 +96,7 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
                 <ImageView
+                    android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/acctype_animal"
@@ -106,7 +108,7 @@
                     android:layout_weight="1"
                     android:text="@string/main_report_animal_opt"
                     style="@style/btn_report"
-                    android:textSize="25dp"/>
+                    android:textSize="15sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -115,6 +117,7 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
                 <ImageView
+                    android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/acctype_brawl"
@@ -127,7 +130,7 @@
                     android:layout_weight="1"
                     android:text="@string/main_report_brawl_opt"
                     style="@style/btn_report"
-                    android:textSize="25dp"/>
+                    android:textSize="15sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -136,6 +139,7 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
                 <ImageView
+                    android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/acctype_other"
@@ -147,10 +151,9 @@
                     android:layout_weight="1"
                     android:text="@string/main_report_other_opt"
                     style="@style/btn_report"
-                    android:textSize="25dp"/>
+                    android:textSize="15sp"/>
             </LinearLayout>
 
-        </LinearLayout>
     </LinearLayout>
 
 

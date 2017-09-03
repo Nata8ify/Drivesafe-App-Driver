@@ -8,8 +8,8 @@
 
 
     <gradient
-        android:endColor="#e6eda1"
-        android:startColor="#c3ce46"
+        android:endColor="#FF4500"
+        android:startColor="#FF4500"
         />
 
 
