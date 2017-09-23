@@ -59,7 +59,6 @@ public class ReportFragment extends Fragment {
                 return false;
             }
 
-
         });
 
         Button btnReportFire = (Button) getView().findViewById(R.id.btn_fire_opt);

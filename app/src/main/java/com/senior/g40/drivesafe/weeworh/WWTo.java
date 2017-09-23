@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.koushikdutta.ion.Ion;
 import com.senior.g40.drivesafe.models.Accident;
@@ -272,11 +273,11 @@ public class WWTo {
 
     public static Accident updateCurrentReportedIncident(@NonNull Context context, long accidentId) {
         try {
-            return  Ion.with(context)
+            return  new GsonBuilder().setDateFormat("MMM dd, yyyy").create().fromJson(Ion.with(context)
                     .load(WWProp.URI.GET_UPDATE_REPORTED_INCIDENT)
                     .setBodyParameter(WWProp.PARAM.ACCID, String.valueOf(accidentId))
-                    .as(Accident.class)
-                    .get();
+                    .asString()
+                    .get(), Accident.class);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
