@@ -55,7 +55,7 @@ public class ActivateFragment extends Fragment {
                     activateFragmentHandler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            txtGs.setText("CRASHING SENSOR STOP");
+                            txtGs.setText(getResources().getString(R.string.main_drvstopserv));
                         }
                     }, 100);
                     getActivity().stopService(service);

@@ -72,8 +72,7 @@ public class AlertActivity extends AppCompatActivity {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                txtAlertMessageLine1.setText("You have " + (millisUntilFinished / 1000) + " second to respond before the application auto send the accident location to the rescuer team." +
-                        "If you want to call for help please tap 'SEND A RESCUE REQUEST' if you don't want any help please tap 'NO, THIS IS NOT ACCIDENT'");
+                txtAlertMessageLine1.setText(getResources().getString(R.string.crashsrvc_alert_message1)+" "+(millisUntilFinished / 1000) +" "+getResources().getString(R.string.crashsrvc_alert_message2) + getResources().getString(R.string.crashsrvc_alert_message3));
                 txtAlertMsgLine2Timer.setText(String.valueOf(millisUntilFinished / 1000));
             }
 
@@ -127,7 +126,7 @@ public class AlertActivity extends AppCompatActivity {
             vibrator.cancel();
             finish();
         } else {
-            Toast.makeText(this, "Unsuccessful", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getResources().getString(R.string.un_success), Toast.LENGTH_LONG).show();
         }
         realm.commitTransaction();
     }

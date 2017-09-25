@@ -96,8 +96,8 @@ public class CrashDetectionService extends IntentService {
             Notification notification = new Notification.Builder(this)
                     .setSmallIcon(R.mipmap.icon)
                     .setContentIntent(pdIntent)
-                    .setContentTitle("Crash Detection Service is Running")
-                    .setContentText("Tap this Notification to Stop...").build();
+                    .setContentTitle(getString(R.string.notification_detail))
+                    .setContentText(getString(R.string.notification_cancel)).build();
             startForeground(1, notification);
             sensorHandler.post(sensorRunnable);
             isSensorActived = true;

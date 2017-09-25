@@ -188,9 +188,9 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Report Incident";
+                    return getString(R.string.page_title_report_incident);
                 case 1:
-                    return "Drive mode";
+                    return getString(R.string.page_title_drivemode);
             }
             return null;
         }
@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
         } else {
-            toast("Permission is required, without this permission, application will be terminated.");
+            toast(getString(R.string.warn_permission));
             finish();
         }
     }
@@ -252,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
         if(!realm.isInTransaction()){realm.beginTransaction();}
         latestAccidentBrief = realm.where(AccidentBrief.class).findFirst();
         if(latestAccidentBrief == null) {
-            Toast.makeText(this, "Unsuccessful, You have no Incident which is Reported.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getResources().getString(R.string.crashsrvc_no_incident_reported), Toast.LENGTH_LONG).show();
             return;
         }
         if (WWTo.setUserFalseAccidentId(this, latestAccidentBrief.getAccidentId(), latestAccidentBrief.getUserId())) {

@@ -174,7 +174,7 @@ public class ReportFragment extends Fragment {
         }
         latestAccidentBrief = realm.where(AccidentBrief.class).findFirst();
         if (latestAccidentBrief == null) {
-            Toast.makeText(getContext(), "Unsuccessful, You have no Incident which is Reported.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), getResources().getString(R.string.crashsrvc_no_incident_reported), Toast.LENGTH_LONG).show();
             return;
         }
         if (WWTo.setUserFalseAccidentId(getContext(), latestAccidentBrief.getAccidentId(), latestAccidentBrief.getUserId())) {

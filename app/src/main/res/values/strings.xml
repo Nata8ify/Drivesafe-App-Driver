@@ -2,17 +2,17 @@
     <string name="app_name">Weeworh</string>
 
     <!--Login-->
-    <string name="login_username">Username</string>
-    <string name="login_password">Password</string>
-    <string name="login_register">Register</string>
-    <string name="login_remember">Remember</string>
-    <string name="login_login">Login</string>
-    <string name="login_nouser">Invalid User Data, Please Check your \'Username\' or \'Password\' is valid.</string>
+    <string name="login_username">ชื่อผู้ใช้</string>
+    <string name="login_password">รหัสผ่าน</string>
+    <string name="login_register">สมัครสมาชิก</string>
+    <string name="login_remember">จดจำผู้ใช้</string>
+    <string name="login_login">ลงชื่อเข้าใช้</string>
+    <string name="login_nouser">ลงชื่อเข้าใช้ผิดพลาด, โปรดเช็คชื่อผู้ใช้หรือรหัสผ่านของคุณ</string>
 
     <!--Main-->
-    <string name="main_drvactive">Activate</string>
+    <string name="main_drvactive">เริ่มการทำงาน</string>
     <string name="main_drvactiveserv">Activate Drivesafe As Service</string>
-    <string name="main_drvdeactive">Deactivate</string>
+    <string name="main_drvdeactive">หยุดการทำงาน</string>
     <string name="main_drvpauseserv">Pause Drivesafe Service</string>
     <string name="main_userfalse">This is False Accident</string>
     <string-array name="main_calloption">
@@ -20,49 +20,65 @@
         <item>Report Another Incident</item>
         <item>My Profile</item>
     </string-array>
+    <string name="main_drvstopserv">ระบบตรวจจับการชนหยุดทำงาน</string>
+
     <!--Main_Report Dialog Option-->
-    <string name="main_report_title">Type Of Incident</string>
-    <string name="main_report_carcrash_opt">Crash</string>
-    <string name="main_report_fire_opt">Fire</string>
-    <string name="main_report_patient_opt">Patient</string>
-    <string name="main_report_animal_opt">Animal</string>
-    <string name="main_report_other_opt">Other</string>
-    <string name="main_report_brawl_opt">Brawl</string>
-    <string name="main_report_we_copy">We are copied!</string>
-    <string name="main_report_alert_reported">This Incident is already reported, By the way the rescue is coming to your reported area.</string>
+    <string name="main_report_title">ประเภทของเหตุร้าย</string>
+    <string name="main_report_carcrash_opt">รถชน</string>
+    <string name="main_report_fire_opt">ไฟไหม้</string>
+    <string name="main_report_patient_opt">ผู้ป่วย</string>
+    <string name="main_report_animal_opt">สัตว์ร้าย</string>
+    <string name="main_report_other_opt">อื่นๆ</string>
+    <string name="main_report_brawl_opt">ทะเลาะวิวาท</string>
+    <string name="main_report_we_copy">เรารับทราบเหตุร้ายแล้ว</string>
+    <string name="main_report_alert_reported">เหตุร้าย</string>
 
     <!--Alert-->
-    <string name="crashsrvc_send_request">Send a Rescue Request</string>
-    <string name="crashsrvc_not_accident">No, This is Not Accident</string>
-    <string name="crashsrvc_cancel_request">Cancel the Rescue Request</string>
-    <string name="crashsrvc_cancel_request_success">Success, The Rescue Request is now Cancelled</string>
-    <string name="crashsrvc_request_ontheway">Request is on the way</string>
-    <string name="crashsrvc_wanna_cancel">If you want to cancel the rescue request,\n Please press on the cancellation button for 10 times to cancel the rescue request.</string>
-    <string name="crashsrvc_you_may_beasked"><u>NOTICE</u> : This is a sensitive action, You may be asked for the cancellation reason by the officer or rescuer</string>
-
+    <string name="crashsrvc_send_request">ต้องการ</string>
+    <string name="crashsrvc_not_accident">ไม่ต้องการ</string>
+    <string name="crashsrvc_cancel_request">ยกเลิกการแจ้งเหตุ</string>
+    <string name="crashsrvc_cancel_request_success">สำเร็จ การแจ้งเหตุถูกยกเลิกเรียบร้อยแล้ว</string>
+    <string name="crashsrvc_request_ontheway">การช่วยเหลือกำลังเดินทางไป</string>
+    <string name="crashsrvc_wanna_cancel">ถ้าหากคุณต้องการที่จะยกเลิกการแจ้งเหตุ\nโปรดกดปุ่ม "ยกเลิกการแจ้งเหตุ" ทั้งหมด 10 ครั้งเพื่อยกเลิกการแจ้งเหตุ</string>
+    <string name="crashsrvc_you_may_beasked"><u>หมายเหตุ</u> : การกระทำนี้เป็นสิ่งที่สำคัญ คุณอาจจะถูกถามสำหรับเหตุผลในการยกเลิกการแจ้งเหตุจากเจ้าหน้าที่ในภายหลัง</string>
+    <string name="crashsrvc_alert_message1">คุณมีเวลา</string>
+    <string name="crashsrvc_alert_message2">วินาทีสำหรับตอบรับแอพพลิเคชั่นของเราก่อนที่แอพพลิเคชั่นจะทำการแจ้งเหตุโดยอัตโนมัติไปยังหน่วยกู้ภัย\n</string>
+    <string name="crashsrvc_alert_message3">ถ้าคุณต้องการความช่วยเหลือโปรดกดปุ่ม ต้องการ \n ถ้าคุณไม่ต้องการความช่วยเหลือโปรดกดปุ่ม ไม่ต้องการ</string>
+    <string name="crashsrvc_no_incident_reported">การทำงานไม่สำเร็จ คุณไม่มีการแจ้งเหตุร้าย</string>
     <!--Crash Detection Service-->
-    <string name="crashsrvc_request_sent">Rescue Request is Sent</string>
+    <string name="crashsrvc_request_sent">การแจ้งเหตุถูกส่งเรียบร้อย</string>
 
     <!--Simple-->
-    <string name="ok">OKAY</string>
-    <string name="submit">Submit</string>
-    <string name="cancel">Cancel</string>
-    <string name="close">Close</string>
-    <string name="dismiss">Dismiss</string>
-    <string name="acknowledge">Acknowledge</string>
-    <string name="on">ON</string>
-    <string name="off">OFF</string>
-    <string name="inprogress">In Progress</string>
-    <string name="sending_rescue_req">Sending Rescue Request...</string>
-    <string name="loading">Loading...</string>
-    <string name="try_again">Try again</string>
-    <string name="goto_setting">Go to Setting</string>
+    <string name="ok">โอเค</string>
+    <string name="submit">ตกลง</string>
+    <string name="cancel">ยกเลิก</string>
+    <string name="close">ปิด</string>
+    <string name="dismiss">ยกเลิก</string>
+    <string name="acknowledge">รับทราบ</string>
+    <string name="on">เปิด</string>
+    <string name="off">ปิด</string>
+    <string name="inprogress">กำลังดำเนินการ</string>
+    <string name="sending_rescue_req">กำลังส่งการแจ้งเหตุ</string>
+    <string name="loading">กำลังโหลด...</string>
+    <string name="try_again">โปรดลองอีกครั้ง</string>
+    <string name="goto_setting">ไปที่การตั้งค่า</string>
+    <string name="un_success">ไม่สำเร็จ</string>
 
     <!--Warning-->
-    <string name="warn_no_network">A Network Connectivity isn\'t Available</string>
-    <string name="warn_no_network_and_please">A Network Connectivity isn\'t Available, Please Enable WIFI or 3G/4G to Continue.</string>
-    <string name="warn_report_failed"><b>Report Failed, Please check there are internet connectivity on this phone. or you can try to send this request again.</b></string>
-    <string name="warn_login_failed"><b>Login Failed</b></string>
-    <string name="warn_login_failed_causes"><b>Please be ensure.. </b>  \n\n 1. <u>The Internet Connection</u> is Available for Weeworh \n\n 2. <u>Username and Password</u> is Corrected.</string>
+    <string name="warn_no_network">ไม่สามรถเชื่อมต่ออินเตอร์เน็ตได้</string>
+    <string name="warn_no_network_and_please">ไม่มีการเชื่อมต่อกับอินเตอร์เน็ต โปรดตรวจสอบอินเตอร์เน็ตของท่านโดยการเชื่อมต่อกับ 3G/4G หรือ Wifi เพื่อใช้งานแอพพลิเคชั่น</string>
+    <string name="warn_report_failed"><b>การแจ้งเหตุไม่สำเร็จ โปรดตรวจสอบการเชื่อมต่ออินเตอร์เน็ตของท่านแล้วแจ้งเหตุใหม่ในภายหลัง</b></string>
+    <string name="warn_login_failed"><b>ลงชื่อเข้าใช้ไม่สำเร็จ</b></string>
+    <string name="warn_login_failed_causes"><b>โปรดแน่ใจว่า </b>  \n\n 1. <u>การเชื่อมต่ออืนเตอร์เน็ตของท่าน</u> ยังเชื่อมต่ออยู่หรือไม่ \n\n 2. <u>ผู้ใช้หรือรหัสผ่าน</u> ถูกต้อง</string>
+    <string name="warn_permission"><b>แอพลิเคชั่นต้องการการอนุญาตจากตำแหน่ง GPS, ถ้าไม่ได้รับอนุญาติแอพลิเคชั่นจะถูกิดการทำงาน</b></string>
 
+    <!--Notification-->
+    <string name="notification_detail">ระบบตรวจจับการชนกำลังทำงาน</string>
+    <string name="notification_cancel">แตะเพื่อหยุดการทำงาน...</string>
+
+    <!--Page Title-->
+    <string name="page_title_report_incident">แจ้งอุบัติเหต</string>
+    <string name="page_title_drivemode">โหมดขับรถ</string>
+    <string name="page_drivemode_description">ระบบตรวจจับการชน</string>
+    <string name="page_report_description">กดปุ่มค้างเพื่อแจ้งเหตุ</string>
 </resources>
