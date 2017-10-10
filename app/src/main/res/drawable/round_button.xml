@@ -1,16 +1,69 @@
-<shape
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="ring"
-    android:innerRadius="110dp"
-    android:thickness="20dp"
-    android:useLevel="false">
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+        <item
+            android:state_pressed="false"
+            android:state_focused="false"
+            android:state_enabled="true"
+            android:state_checked="true">
+            <shape android:shape="ring"
+                android:innerRadius="110dp"
+                android:thickness="20dp"
+                android:useLevel="false">
+                <gradient
+                    android:endColor="#FF4500"
+                    android:startColor="#FF4500"
+                    />
+            </shape>
+        </item>
+        <item
+            android:state_pressed="true"
+            android:state_focused="false"
+            android:state_enabled="true"
+            android:state_checked="true">
+        <shape android:shape="ring"
+            android:innerRadius="110dp"
+            android:thickness="20dp"
+            android:useLevel="false">
+            <gradient
+                android:endColor="#FF4500"
+                android:startColor="#FF4500"
+                />
+        </shape>
+        </item>
+
+        <item
+            android:state_pressed="false"
+            android:state_focused="false"
+            android:state_enabled="true"
+            android:state_checked="false">
+            <shape android:shape="ring"
+                android:innerRadius="110dp"
+                android:thickness="20dp"
+                android:useLevel="false">
+                <gradient
+                    android:endColor="#FFB700"
+                    android:startColor="#FFB700"
+                    />
+            </shape>
+        </item>
+        <item
+            android:state_pressed="true"
+            android:state_focused="false"
+            android:state_enabled="true"
+            android:state_checked="false">
+            <shape android:shape="ring"
+                android:innerRadius="110dp"
+                android:thickness="20dp"
+                android:useLevel="false">
+                <gradient
+                    android:endColor="#FFB700"
+                    android:startColor="#FFB700"
+                    />
+            </shape>
+        </item>
+
+    </selector>
 
 
 
-    <gradient
-        android:endColor="#FF4500"
-        android:startColor="#FF4500"
-        />
 
 
-</shape>

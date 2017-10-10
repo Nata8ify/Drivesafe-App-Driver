@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.senior.g40.drivesafe.R;
 import com.senior.g40.drivesafe.engines.CrashingSensorEngines;
@@ -33,7 +34,7 @@ public class ActivateFragment extends Fragment {
         super.onStart();
 
         final TextView txtGs = (TextView) getView().findViewById(R.id.txt_gs);
-        final Button btnActiveDrivesafe = (Button) getView().findViewById(R.id.btn_activeDrivesafe);
+        final ToggleButton btnActiveDrivesafe = (ToggleButton) getView().findViewById(R.id.btn_activeDrivesafe);
         final Button btnActiveDrivesafeService = (Button) getView().findViewById(R.id.btn_activeDrivesafeService);
         final CrashingSensorEngines crashingSensorEngines;
         crashingSensorEngines = CrashingSensorEngines.getInstance(getContext());
@@ -46,8 +47,8 @@ public class ActivateFragment extends Fragment {
         btnActiveDrivesafe.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent service =  new Intent(getContext(), CrashDetectionService.class);
-                activateState[0] = 1 - activateState[0];
-                if (activateState[0] == 1) {
+
+                if(btnActiveDrivesafe.isChecked() == true){
                     btnActiveDrivesafe.setText(getResources().getString(R.string.main_drvdeactive));
                     getActivity().startService(service);
                 } else {
@@ -63,6 +64,11 @@ public class ActivateFragment extends Fragment {
                 }
             }
         });
+
+
+
+
+
     }
 
 
