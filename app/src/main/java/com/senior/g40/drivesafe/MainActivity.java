@@ -18,6 +18,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -30,6 +33,7 @@ import com.senior.g40.drivesafe.engines.GPSVerifierAsyncTask;
 import com.senior.g40.drivesafe.fragments.ActivateFragment;
 import com.senior.g40.drivesafe.fragments.ReportFragment;
 import com.senior.g40.drivesafe.models.Accident;
+import com.senior.g40.drivesafe.models.Profile;
 import com.senior.g40.drivesafe.models.extras.AccidentBrief;
 import com.senior.g40.drivesafe.utils.LocationUtils;
 import com.senior.g40.drivesafe.utils.SettingVerify;
@@ -161,6 +165,29 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_logout :
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        realm.delete(Profile.class);
+                        finish();
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    }
+                });
+                return true;
+            default : return super.onOptionsItemSelected(item);
+        }
+    }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 

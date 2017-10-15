@@ -32,6 +32,7 @@
     <string name="main_report_brawl_opt">ทะเลาะวิวาท</string>
     <string name="main_report_we_copy">เรารับทราบเหตุร้ายแล้ว</string>
     <string name="main_report_alert_reported">เหตุร้าย</string>
+    <string name="menu_logout">ออกจากระบบ</string>
 
     <!--Alert-->
     <string name="crashsrvc_send_request">ต้องการ</string>
