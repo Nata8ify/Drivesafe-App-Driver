@@ -45,7 +45,7 @@ public class ReportFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        Button btnReportCrash = (Button) getView().findViewById(R.id.btn_crash_opt);
+        ImageButton btnReportCrash = (ImageButton) getView().findViewById(R.id.btn_crash_opt);
         btnReportCrash.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -61,7 +61,7 @@ public class ReportFragment extends Fragment {
 
         });
 
-        Button btnReportFire = (Button) getView().findViewById(R.id.btn_fire_opt);
+        ImageButton btnReportFire = (ImageButton) getView().findViewById(R.id.btn_fire_opt);
         btnReportFire.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -77,7 +77,7 @@ public class ReportFragment extends Fragment {
 
         });
 
-        Button btnReportBrawl = (Button) getView().findViewById(R.id.btn_brawl_opt);
+        ImageButton btnReportBrawl = (ImageButton) getView().findViewById(R.id.btn_brawl_opt);
         btnReportBrawl.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -93,7 +93,7 @@ public class ReportFragment extends Fragment {
 
         });
 
-        Button btnReportPatient = (Button) getView().findViewById(R.id.btn_patient_opt);
+        ImageButton btnReportPatient = (ImageButton) getView().findViewById(R.id.btn_patient_opt);
         btnReportPatient.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -109,7 +109,7 @@ public class ReportFragment extends Fragment {
 
         });
 
-        Button btnReportAnimal = (Button) getView().findViewById(R.id.btn_animal_opt);
+        ImageButton btnReportAnimal = (ImageButton) getView().findViewById(R.id.btn_animal_opt);
         btnReportAnimal.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -125,7 +125,7 @@ public class ReportFragment extends Fragment {
 
         });
 
-        Button btnReportOther = (Button) getView().findViewById(R.id.btn_other_opt);
+        ImageButton btnReportOther = (ImageButton) getView().findViewById(R.id.btn_other_opt);
         btnReportOther.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {

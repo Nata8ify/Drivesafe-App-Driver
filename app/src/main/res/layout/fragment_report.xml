@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_report"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,11 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="?android:dividerVertical"
-        android:showDividers="middle"
         android:orientation="vertical"
-        >
+        android:showDividers="middle">
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="5"
@@ -22,168 +23,140 @@
             android:text="@string/page_report_description"
             android:textSize="20sp"
             android:textStyle="bold" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:divider="?android:dividerHorizontal"
-        android:gravity="center"
-        android:showDividers="middle" >
-
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:divider="?android:dividerVertical"
+            android:divider="?android:dividerHorizontal"
+            android:gravity="center"
+            android:orientation="horizontal"
             android:showDividers="middle">
 
+
             <LinearLayout
-                android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:divider="?android:dividerVertical"
+                android:orientation="vertical"
+                android:showDividers="middle">
 
-                <ImageView
-
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:src="@drawable/acctype_crash" />
+                    android:orientation="vertical"
+                    android:padding="5dp">
 
-                <Button
-                    android:id="@+id/btn_crash_opt"
-                    style="@style/btn_report"
+                    <ImageButton
+                        android:padding="0dp"
+                        android:id="@+id/btn_crash_opt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/btn_report_crash" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/main_report_carcrash_opt"
-                    android:textSize="15sp" />
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <ImageButton
+                        android:padding="0dp"
+                        android:id="@+id/btn_fire_opt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/btn_report_fire" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <ImageButton
+                        android:padding="0dp"
+                        android:id="@+id/btn_patient_opt"
+                        android:src="@drawable/btn_report_patient"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
-                android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:divider="?android:dividerVertical"
                 android:orientation="vertical"
-                android:layout_weight="1">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/acctype_fire"
-                    android:layout_weight="1" />
-                <Button
-                    android:id="@+id/btn_fire_opt"
+                android:showDividers="middle">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/main_report_fire_opt"
-                    style="@style/btn_report"
-                    android:textSize="15sp"/>
-            </LinearLayout>
+                    android:orientation="vertical"
+                    android:padding="5dp">
 
-            <LinearLayout
-                android:padding="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1">
-                <ImageView
+                    <ImageButton
+                        android:padding="0dp"
+                        android:id="@+id/btn_animal_opt"
+                        android:src="@drawable/btn_report_animal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"/>
+                </LinearLayout>
 
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/acctype_patient"
-                    android:layout_weight="1" />
-                <Button
-                    android:id="@+id/btn_patient_opt"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/main_report_patient_opt"
-                    style="@style/btn_report"
-                    android:textSize="15sp"/>
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <ImageButton
+                        android:padding="0dp"
+                        android:id="@+id/btn_brawl_opt"
+                        android:src="@drawable/btn_report_brawl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <ImageButton
+                        android:padding="0dp"
+                        android:id="@+id/btn_other_opt"
+                        android:src="@drawable/btn_report_other"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                         />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:divider="?android:dividerVertical"
-            android:showDividers="middle">
-        <LinearLayout
-                android:padding="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1">
-                <ImageView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/acctype_animal"
-                    android:layout_weight="1" />
-                <Button
-                    android:id="@+id/btn_animal_opt"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/main_report_animal_opt"
-                    style="@style/btn_report"
-                    android:textSize="15sp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:padding="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1">
-                <ImageView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/acctype_brawl"
-                    android:layout_weight="1" />
-                <Button
-
-                    android:id="@+id/btn_brawl_opt"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/main_report_brawl_opt"
-                    style="@style/btn_report"
-                    android:textSize="15sp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:padding="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1">
-                <ImageView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/acctype_other"
-                    android:layout_weight="1" />
-                <Button
-                    android:id="@+id/btn_other_opt"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/main_report_other_opt"
-                    style="@style/btn_report"
-                    android:textSize="15sp"/>
-            </LinearLayout>
-    </LinearLayout>
-    </LinearLayout>
     </LinearLayout>
 
 
@@ -194,4 +167,6 @@
         android:text="@string/main_userfalse"
         style="@style/btn_safe"
         android:visibility="gone"/>
+
+
 </LinearLayout>

@@ -52,7 +52,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/main_report_carcrash_opt"
-                style="@style/btn_report"/>
+                style="@style/btn_report_crash"/>
 
             <Button
                 android:id="@+id/btn_fire_opt"
@@ -60,7 +60,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/main_report_fire_opt"
-                style="@style/btn_report"/>
+                style="@style/btn_report_fire"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,7 +74,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/main_report_patient_opt"
-                style="@style/btn_report"/>
+                style="@style/btn_report_patient"/>
 
             <Button
                 android:id="@+id/btn_animal_opt"
@@ -82,7 +82,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/main_report_animal_opt"
-                style="@style/btn_report"/>
+                style="@style/btn_report_animal"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -96,7 +96,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/main_report_brawl_opt"
-                style="@style/btn_report"/>
+                style="@style/btn_report_brawl"/>
 
             <Button
                 android:id="@+id/btn_other_opt"
@@ -104,7 +104,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/main_report_other_opt"
-                style="@style/btn_report"/>
+                style="@style/btn_report_other"/>
         </LinearLayout>
     </LinearLayout>
 
