@@ -31,7 +31,7 @@
     <string name="main_report_other_opt">อื่นๆ</string>
     <string name="main_report_brawl_opt">ทะเลาะวิวาท</string>
     <string name="main_report_we_copy">เรารับทราบเหตุร้ายแล้ว</string>
-    <string name="main_report_alert_reported">เหตุร้าย</string>
+    <string name="main_report_alert_reported">ระบบได้รับทราบข้อมูลการแจ้งเหตุนี้เรียบร้อยแล้ว จึงแจ้งให้ทราบและขอขอบคุณสำหรับการเป็นส่วนหนึ่งในกระบวนการให้ความช่วยเหลือเหตุนี้</string>
     <string name="menu_logout">ออกจากระบบ</string>
 
     <!--Alert-->
